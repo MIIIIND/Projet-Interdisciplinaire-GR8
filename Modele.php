@@ -1,7 +1,7 @@
 <?php 
     date_default_timezone_set('Europe/Brussels');
     $hote='localhost';
-    $nomBD='Projet';
+    $nomBD='13';
     $user='root';
     $mdp=''; 
     try {

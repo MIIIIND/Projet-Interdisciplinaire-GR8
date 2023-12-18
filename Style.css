@@ -1,0 +1,10 @@
+header{
+    background-color: rgb(115, 186, 113);
+}
+body{
+    background-color: rgb(113, 186, 164);
+}
+footer{
+    background-color: rgb(186, 141, 113);
+    display: flex;
+}

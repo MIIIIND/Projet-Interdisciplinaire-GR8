@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Style.css" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Style.css">
     <title>IsimsParc</title>
   </head>
   <header>

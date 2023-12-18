@@ -2,7 +2,5 @@
 
 require 'Modele.php';
 
-$billets = getBillets();
-
-require 'vueAccueil.php';
+require 'VueLog.php';
 ?>

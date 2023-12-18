@@ -3,6 +3,7 @@ header{
 }
 body{
     background-color: rgb(113, 186, 164);
+    margin: 0;
 }
 #log {
     background-color: rgb(203, 203, 203);

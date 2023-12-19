@@ -12,9 +12,9 @@ HTML/CSS pages
 - Modo   (OK) 
 - Gestion Art/type (OK) 
 - Gesion Commande
-- Gestion comm (OK MAIS PAS DE FILTRE)
-- Admin
-- Admin/stat (WIP) 
+- Gestion comm (WIP)
+- Admin (WIP) 
+- Admin/stat (OK MAIS PAS DE FILTRE) 
 - Gestion modo (OK) 
 
 

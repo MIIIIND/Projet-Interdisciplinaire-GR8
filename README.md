@@ -9,13 +9,13 @@ HTML/CSS pages
 - User-Magasin Loby
 - User-Magasin SPE
 - User-Suivi commande
-- Modo   (HTML ok, CSS Work in progress) 
-- Gestion Art/type (WIP) 
+- Modo   (OK) 
+- Gestion Art/type (OK) 
 - Gesion Commande
-- Gestion comm
+- Gestion comm (WIP)
 - Admin
-- Admin/stat
-- Gestion modo (HTML, CSS OK) 
+- Admin/stat (WIP) 
+- Gestion modo (OK) 
 
 
 

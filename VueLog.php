@@ -1,12 +1,10 @@
 <?php
 require 'Modele.php';
 
-$req_log = $bd->query('SELECT * from user');
-$req_log->setFetchMode(PDO::FETCH_OBJ);
 session_start();
 if (isset($_POST['connexion'])){
-  $Id = trim($_POST['Id']);
-  $Mpd = trim($_POST['Mpd']);
+  $login = trim($_POST['login']);
+  $password = trim($_POST['password']);
 
   while ($result=$req_log->fetch() ) {
     if ( $Id==$result->login and $Mpd==$result->password) {
@@ -42,11 +40,11 @@ else if ( isset($_POST['deconnexion']) ) {
           if ( empty($_SESSION) ) { // utilisateur non connecté
         ?>
         <form method="post" action="VueLog.php">
-            <label for="Id">Identifiant :<br>
-            <input type="text" name="Id" id="Id">
+            <label for="login">Identifiant :<br>
+            <input type="text" name="login" id="login">
             </label>
-            <label for="Mdp">Mot de passe :<br>
-            <input type="password" name="Mpd" id="Mpd">
+            <label for="password">Mot de passe :<br>
+            <input type="password" name="password" id="password">
             </label>
             <p><input type="submit" name="connexion" value="Connexion">
         </form>

@@ -3,7 +3,6 @@
 class bd {
     protected function getBd(){
         date_default_timezone_set('Europe/Brussels');
-        
         try {
             require_once 'config.php';
             $bd=new PDO('mysql:host='.$hoteDB.';dbname='.$nomBD, $userDB, $mdpDB
@@ -30,6 +29,20 @@ class bd {
         else
             #throw new Execption("le magasin on le connais pas'$idMag'");
             echo "le magasin on le connais pas'$idMag'";
+    }
+
+    public function getUser($login, $password){
+        try {
+            $bd = $this->getBd();
+            $user = $bd->prepare('SELECT * from user WHERE login=? AND password=?');
+            $user->execute(array((int) $login, (int) $password));
+            $user->setFetchMode(PDO::FETCH_OBJ);
+            if ($user->rowcount() == 1)
+                return $user->fetch();
+            else
+                echo "Erreur dans le login ou le mot de passe";
+        }
+        catch (Exception $e) {echo "Erreur de connexion : $e";}
     }
 }
 

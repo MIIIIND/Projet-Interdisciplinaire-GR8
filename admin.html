@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Apply some basic styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Style for the big box */
+        .big-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: repeat(2, 1fr);    /* 2 rows */
+            gap: 20px; /* Adjust the gap between smaller boxes */
+            width: 800px; /* Set the width of the big box */
+            height: 600px; /* Set the height of the big box */
+            border: 2px solid #333; /* Border for the big box */
+            padding: 10px; /* Padding for the big box */
+        }
+
+        /* Style for the smaller boxes */
+        .small-box {
+            border: 1px solid #666; /* Border for the smaller boxes */
+            padding: 10px; /* Padding for the smaller boxes */
+            text-align: center; /* Align text to the center */
+            position: relative; /* Set position to relative for absolute positioning */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Make the small box take full height */
+        }
+
+        /* Style for the combo box and text box */
+        select, input {
+            width: 100%; /* Make combo box and text box fill the container */
+            margin-top: 5px; /* Add some space at the top */
+            margin-bottom: 10px; /* Add some space at the bottom */
+        }
+
+        /* Style for the centered button */
+        .centered-button {
+            text-align: center;
+            padding: 10px; /* Add padding for better visibility */
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: auto; /* Center the button */
+        }
+
+        /* Style to push the button to the bottom */
+        .button-container {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="big-box">
+        <div class="small-box">
+            <div>Modification Magasin</div>
+            <div>
+                <label for="nom">Nom</label>
+                <select id="nom">
+                    <!-- Add options for the combo box -->
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div style="margin-bottom: 20px;"></div> <!-- Empty space -->
+
+            <div>
+                <label for="nomTextBox">Nom</label>
+                <input type="text" id="nomTextBox" />
+            </div>
+            <div>
+                <label for="type">Type</label>
+                <select id="type">
+                    <!-- Add options for the combo box -->
+                    <option value="type1">Type 1</option>
+                    <option value="type2">Type 2</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+
+            <!-- Centered clickable button -->
+            <div class="button-container">
+                <button class="centered-button">Modifier</button>
+            </div>
+        </div>
+        <div class="small-box">
+            <div>Ajout Type</div>
+            <div>
+                <label for="typeTextBox">Type</label>
+                <input type="text" id="typeTextBox" />
+            </div>
+            <div class="button-container">
+                <!-- Clickable button -->
+                <button class="centered-button">Ajout</button>
+            </div>
+        </div>
+        <div class="small-box">
+            <!-- Centered button for "Gestion Moderateur" -->
+            <button class="centered-button">Gestion Moderateur</button>
+        </div>
+        <div class="small-box">
+            <div>Ajout de Magasin</div>
+            <div>
+                <label for="nomMagasin">Nom</label>
+                <input type="text" id="nomMagasin" />
+            </div>
+            <div>
+                <label for="typeMagasin">Type</label>
+                <select id="typeMagasin">
+                    <!-- Add options for the combo box -->
+                    <option value="type1">Type 1</option>
+                    <option value="type2">Type 2</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="button-container">
+                <!-- Clickable button -->
+                <button class="centered-button">Ajout</button>
+            </div>
+        </div>
+        <div class="small-box">
+            <div>Suppression Type</div>
+            <div>
+                <label for="typeToDelete">Type</label>
+                <select id="typeToDelete">
+                    <!-- Add options for the combo box -->
+                    <option value="type1">Type 1</option>
+                    <option value="type2">Type 2</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="button-container">
+                <!-- Clickable button -->
+                <button class="centered-button">Supprimer</button>
+            </div>
+        </div>
+        <div class="small-box">
+            <div></div>
+            <button class="centered-button">Statistique</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

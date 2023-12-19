@@ -23,4 +23,4 @@ HTML/CSS pages
 DATABASE
 =============================================================================================
 - V1 
-- V2 - fixed primary key auto increment 
+- V2  fixed primary key auto increment 

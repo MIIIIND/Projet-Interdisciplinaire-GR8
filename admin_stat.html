@@ -96,78 +96,68 @@
             </div>
 
             <!-- Additional div on the right of the inner box -->
-<div class="additional-div">
-    <!-- 1st line: Title "PRIX" -->
-    <div>PRIX</div>
+            <div class="additional-div">
+                <!-- 1st line: Title "PRIX" -->
+                <div>PRIX</div>
 
-    <!-- 2nd line: "Min:" and a textbox -->
-    <div>
-        <span>Min:</span>
-        <input type="text" placeholder="Enter min price">
-    </div>
+                <!-- Form for min and max price input -->
+                <form method="post" action="process_data.php">
+                    <!-- 2nd line: "Min:" and a textbox -->
+                    <div>
+                        <span>Min:</span>
+                        <input type="text" name="minPrice" placeholder="Enter min price">
+                    </div>
 
-    <!-- 3rd line: "Max:" and a textbox -->
-    <div>
-        <span>Max:</span>
-        <input type="text" placeholder="Enter max price">
-    </div>
+                    <!-- 3rd line: "Max:" and a textbox -->
+                    <div>
+                        <span>Max:</span>
+                        <input type="text" name="maxPrice" placeholder="Enter max price">
+                    </div>
 
-    <!-- Empty space -->
+                    <!-- Empty space -->
 
-    <!-- 5th line: Title "VENTE" -->
-    <div>VENTE</div>
+                    <!-- 5th line: Title "VENTE" -->
+                    <div>VENTE</div>
 
-    <!-- 6th line: "Min:" and a textbox -->
-    <div>
-        <span>Min:</span>
-        <input type="text" placeholder="Enter min price">
-    </div>
+                    <!-- 6th line: "Min:" and a textbox -->
+                    <div>
+                        <span>Min:</span>
+                        <input type="text" placeholder="Enter min price">
+                    </div>
 
-    <!-- 7th line: "Max:" and a textbox -->
-    <div>
-        <span>Max:</span>
-        <input type="text" placeholder="Enter max price">
-    </div>
+                    <!-- 7th line: "Max:" and a textbox -->
+                    <div>
+                        <span>Max:</span>
+                        <input type="text" placeholder="Enter max price">
+                    </div>
 
-    <!-- 8th line: Empty space -->
+                    <!-- 8th line: Empty space -->
 
-    <!-- 9th line: "Product type" and a combo box -->
-    <div>
-        <span>Product type:</span>
-        <select>
-            <option value="type1">Type 1</option>
-            <option value="type2">Type 2</option>
-            <!-- Add more options as needed -->
-        </select>
+                    <!-- 9th line: "Product type" and a combo box -->
+                    <div>
+                        <span>Product type:</span>
+                        <select>
+                            <option value="type1">Type 1</option>
+                            <option value="type2">Type 2</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
 
-<!-- // Query to retrieve type_name from product_type
-$query = "SELECT type_name FROM product_type";
-$result = $conn->query($query);
+                    <!-- 10th line: "Shop type" and a combo box -->
+                    <div>
+                        <span>Shop type:</span>
+                        <select>
+                            <option value="shop1">Shop 1</option>
+                            <option value="shop2">Shop 2</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
 
-// Check if the query was successful
-if ($result) {
-    // Create a combo box and populate it with the retrieved data
-    echo '<select name="productType" id="productType">';
-    while ($row = $result->fetch_assoc()) {
-        echo '<option value="' . $row['type_name'] . '">' . $row['type_name'] . '</option>';
-    }
-    echo '</select>';  -->
-
-
-    </div>
-
-    <!-- 10th line: "Shop type" and a combo box -->
-    <div>
-        <span>Shop type:</span>
-        <select>
-            <option value="shop1">Shop 1</option>
-            <option value="shop2">Shop 2</option>
-            <!-- Add more options as needed -->
-        </select>
-    </div>
-</div>
-                
-
+                    <!-- Submit button -->
+                    <div>
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

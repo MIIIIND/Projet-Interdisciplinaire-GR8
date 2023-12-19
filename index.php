@@ -1,13 +1,10 @@
 <?php
 require 'controller.php';
+session_start();   
 
-if (empty($_SESSION)) {
-    require 'VueLog.php';
+if (!isset($_POST['role'])) {
     login();
-}
-else {
-    require 'VueAccueil.php';
-}
 
+}
 
 ?>

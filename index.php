@@ -1,12 +1,5 @@
 <?php
-require 'Modele.php';
+require 'controller.php';
 
-try {
-    $shops = getshops();
-    require 'VueAccueil.php';
-}
-catch (Exception $e){
-    $MessageError = $e->getMessage();
-    require 'VueError.php';
-}
+
 ?>

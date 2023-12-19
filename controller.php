@@ -1,12 +1,14 @@
 <?php 
 require_once 'Modele.php';
+$DB = new bd();
 
 try {
-    $shops = getshops();
+    $shops = $DB->getAllShops();
     require 'VueAccueil.php';
 }
 catch (Exception $e){
     $MessageError = $e->getMessage();
     require 'VueError.php';
 }
+
 ?>

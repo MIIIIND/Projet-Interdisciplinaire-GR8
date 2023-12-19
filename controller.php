@@ -2,6 +2,18 @@
 require_once 'model.php';
 $DB = new bd();
 
+function connexion(){
+    if ( isset($_POST['connexion']) ) {
+        login();
+    }
+}
+function deconnexion(){
+    if ( isset($_POST['deconnexion']) ) {
+        session_destroy() ;		//on détruit la session
+        header('Location:index.php');	//on redirige
+    }
+}
+
 function login() {
     require 'config.php';
     if ($LOGIN_METHOD == 1) {loginDB();}

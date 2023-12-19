@@ -6,10 +6,10 @@
         <title>IsimsParc</title>
     </head>
     <body>
-    <?= require 'header.php';?>
+    <?= require '_header.php';?>
         <div class='contenu'>
             <p>bonjour je suis sur la structure de base</p>
         </div>
-    <?= require 'footer.php';?>
+    <?= require '_footer.php';?>
     </body>  
 </html>

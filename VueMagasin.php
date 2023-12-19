@@ -1,5 +1,5 @@
 <?php
-  $titre = 'IsimsParc'. $shop->name;
+  $titre = 'IsimsParc';
   ob_start();
 ?>
 <article>
@@ -10,5 +10,5 @@
   </article>
 <?php
   $contenu = ob_get_clean();
-  require 'StructurePage.php';
+  require '_StructurePage.php';
 ?> 

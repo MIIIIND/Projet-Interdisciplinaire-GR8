@@ -7,16 +7,17 @@ function login() {
     $login = trim($_POST['login']);
     $password = trim($_POST['password']);
     $user = $DB->getUser($login, $password);
-    if ($user->first_name == 'Admin'){
-        $_SESSION['admin']='True';
-        header('Location:VueAcceuil.php');
+    switch ($user->role_Fk) {
+        case '1':
+            $_SESSION['role']='Admin';
+            break;
+        case '2':
+            $_SESSION['role']='Modo';
+            break;
+        default:
+            $_SESSION['role']='Client';
+            break;
     }
-    else{
-        $_SESSION['admin']='False';
-        header('Location:Vuelog.php');
-    }
-    exit();
-
 }
 
 try {

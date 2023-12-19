@@ -7,7 +7,7 @@ try {
     $id = intval($_GET['id']);
     if ($id != 0) {
       $shop = getshop($id);
-      require 'VueLog.php';
+      require 'VueLogin.php';
     }
     else
       throw new Exception("Identifiant de billet incorrect");

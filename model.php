@@ -4,7 +4,7 @@ class bd {
     protected function getBd(){
         date_default_timezone_set('Europe/Brussels');
         try {
-            require_once 'config.php';
+            require 'config.php';
             $bd=new PDO('mysql:host='.$hoteDB.';dbname='.$nomBD, $userDB, $mdpDB
             ,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             $bd->exec("SET NAMES 'utf8'");
@@ -35,7 +35,7 @@ class bd {
         try {
             $bd = $this->getBd();
             $user = $bd->prepare('SELECT * from user WHERE login=? AND password=?');
-            $user->execute(array((int) $login, (int) $password));
+            $user->execute(array((string) $login, (string) $password));
             $user->setFetchMode(PDO::FETCH_OBJ);
             if ($user->rowcount() == 1)
                 return $user->fetch();

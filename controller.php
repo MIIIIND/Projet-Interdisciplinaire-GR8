@@ -4,7 +4,7 @@ $DB = new bd();
 
 function login() {
     require 'config.php';
-    if ($LOGIN_METHOD == '1') {loginDB();}
+    if ($LOGIN_METHOD == 1) {loginDB();}
     else {loginLDAP();}
 }
 
@@ -31,30 +31,24 @@ function loginLDAP() {
 
 function loginDB() {
     global $DB;
-    if (!isset($_POST['connexion'])) {
-        require 'VueLogin.php';
+    $login = trim($_POST['login']);
+    $password = trim($_POST['password']);
+    $user = $DB->getUser($login, $password);
+    if ($user == null) {
+        echo "Erreur dans le login ou le mot de passe";
         return;
     }
-    else {
-        $login = trim($_POST['login']);
-        $password = trim($_POST['password']);
-        $user = $DB->getUser($login, $password);
-        if ($user == null) {
-            echo "Erreur dans le login ou le mot de passe";
-            return;
-        }
-        switch ($user->role_Fk) {
-            case '1':
-                $_SESSION['role']='Admin';
-                header('Location: VueMagasin.php');
-                break;
-            case '2':
-                $_SESSION['role']='Modo';
-                break;
-            case '3':
-                $_SESSION['role']='Client';
-                break;
-        }
+    switch ($user->role_Fk) {
+        case '1':
+            $_SESSION['role']='Admin';
+            header('Location: VueMagasin.php');
+            break;
+        case '2':
+            $_SESSION['role']='Modo';
+            break;
+        case '3':
+            $_SESSION['role']='Client';
+            break;
     }
 }
 

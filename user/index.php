@@ -12,7 +12,7 @@ include 'db.php';
 
 
 
-    <a href="admin_stat.php">Page 2</a>
+    <a href="user.php">Page 2</a>
 
 </body>
 </html>

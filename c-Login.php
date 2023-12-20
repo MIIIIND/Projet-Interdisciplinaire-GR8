@@ -52,16 +52,17 @@ function loginDB() {
         echo "<p>Erreur dans le login ou le mot de passe.</p>";
         return;
     }
-    switch ($user->role_Fk) {
-        case '1':
+    $_SESSION['login']=$user->user_id;
+    switch ($user->role_name) {
+        case 'Admin':
             $_SESSION['role']='Admin';
             header('Location: c-master.php');
             break;
-        case '2':
+        case 'Modo':
             $_SESSION['role']='Modo';
             header('Location: c-master.php');
             break;
-        case '3':
+        case 'Client':
             $_SESSION['role']='Client';
             header('Location: c-master.php');
             break;

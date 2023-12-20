@@ -1,6 +1,4 @@
-<?php 
-$title = "Magasin";
-$content = ?>
+<?php ob_start(); ?>
 	<a href="modo.php"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
 	<p>nom prenom logement</p>
 	<p>article</p>
@@ -24,5 +22,7 @@ $content = ?>
 		</label>
 	</form>'
 <?php ;
+$title = "Magasin";
+$content = ob_get_clean();
 require '_template.php';
 ?>

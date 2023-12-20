@@ -13,21 +13,39 @@ function connexion(){
 
 function loginLDAP() {
     if ( isset($_POST['connexion']) ) {
-        $DOMAIN = "grp8.lan";
-        $ldaprdn = trim($_POST['login'])."@".$DOMAIN;
+        $ldaprdn = trim($_POST['login']);
         $ldappass = trim($_POST['password']);
         $ldapconn = ldap_connect("192.168.150.1") or die("Could not connect to LDAP server.");
         ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
     
-        if ($ldapconn) {
-            if ($ldaprdn == "" || $ldappass == "") {echo "<p>Erreur dans l'identifiant ou le mot de passe</p>";}
-            elseif (@ldap_bind($ldapconn, $ldaprdn, $ldappass)) {
-                $_SESSION['login']=$ldaprdn;
-                header('Location:index.php'); //on redirige pour vider $_POST
-                exit();
+        if ($ldapConn) {
+            // Authentification
+            $ldapBind = ldap_bind($ldapConn, $ldapUser, $ldapPass);
+        
+            if ($ldapBind) {
+                // Paramètres de recherche
+                $baseDN = "OU=Users,DC=example,DC=com";
+                $searchFilter = "(sAMAccountName=username)";
+                $searchScope = "sub";
+        
+                // Effectuer la recherche
+                $ldapSearch = ldap_search($ldapConn, $baseDN, $searchFilter, [], 0, 0, 0, 0);
+                $entries = ldap_get_entries($ldapConn, $ldapSearch);
+        
+                // Afficher les résultats
+                for ($i = 0; $i < $entries["count"]; $i++) {
+                    echo "DN: " . $entries[$i]["dn"] . "\n";
+                    echo "Attributes: " . json_encode($entries[$i]) . "\n";
+                }
+        
+                // Fermer la connexion LDAP
+                ldap_close($ldapConn);
+            } else {
+                echo "Échec de l'authentification LDAP";
             }
-            else {echo "<p>Erreur dans l'identifiant ou le mot de passe</p>" ;}
+        } else {
+            echo "Impossible de se connecter au serveur LDAP";
         }
     }
 }
@@ -43,7 +61,7 @@ function loginDB() {
     }
     switch ($user->role_Fk) {
         case '1':
-            $_SESSION['role']='Admin';
+                ='Admin';
             header('Location: c-master.php');
             break;
         case '2':

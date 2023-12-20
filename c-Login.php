@@ -13,9 +13,8 @@ function connexion(){
 
 function loginLDAP() {
     if ( isset($_POST['connexion']) ) {
-        $DOMAIN = "grp8.lan";
-        $ldaprdn = trim($_POST['login'])."@".$DOMAIN;
-        $ldappass = trim($_POST['password']);
+        $ldaprdn = (string) trim($_POST['login']);
+        $ldappass = (string) trim($_POST['password']);
         $ldapconn = ldap_connect("192.168.150.1") or die("Could not connect to LDAP server.");
         ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
@@ -23,12 +22,24 @@ function loginLDAP() {
         if ($ldapconn) {
             if ($ldaprdn == "" || $ldappass == "") {echo "<p>Erreur dans l'identifiant ou le mot de passe</p>";}
             elseif (@ldap_bind($ldapconn, $ldaprdn, $ldappass)) {
-                $_SESSION['login']=$ldaprdn;
-                header('Location:index.php'); //on redirige pour vider $_POST
-                exit();
-            }
-            else {echo "<p>Erreur dans l'identifiant ou le mot de passe</p>" ;}
-        }
+                # $_SESSION['login']=$ldaprdn;
+                $upn = explode("@", $ldaprdn)[1];
+                switch ($upn) {
+                    case 'administrateur.lan':
+                        $_SESSION['role']='Admin';
+                        header('Location: c-master.php');
+                        break;
+                    case 'modo.lan':
+                        $_SESSION['role']='Modo';
+                        header('Location: c-master.php');
+                        break;
+                    case 'grp8.lan':
+                        $_SESSION['role']='Client';
+                        header('Location: c-master.php');
+                        break;
+                }
+            } else {echo "<p>Erreur dans l'identifiant ou le mot de passe.</p>" ;}
+        } else {echo "<p>Impossible de se connecter au serveur.</p>" ;}
     }
 }
 
@@ -38,7 +49,7 @@ function loginDB() {
     $password = trim($_POST['password']);
     $user = $user_db->getUser($login, $password);
     if ($user == null) {
-        echo "Erreur dans le login ou le mot de passe";
+        echo "<p>Erreur dans le login ou le mot de passe.</p>";
         return;
     }
     switch ($user->role_Fk) {
@@ -48,9 +59,11 @@ function loginDB() {
             break;
         case '2':
             $_SESSION['role']='Modo';
+            header('Location: c-master.php');
             break;
         case '3':
             $_SESSION['role']='Client';
+            header('Location: c-master.php');
             break;
     }
 }

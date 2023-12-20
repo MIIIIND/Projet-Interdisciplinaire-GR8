@@ -1,17 +1,23 @@
 <?php
-require 'c-deconnect.php';
+function deconnexion(){
+    if ( isset($_POST['deconnexion']) ) {
+        session_destroy() ;		//on détruit la session
+        header('Location:index.php');	//on redirige
+    }
+}
+
 session_start();
 
 deconnexion();
 switch ($_SESSION['role']) {
     case 'Admin':
-        require 'views/v-Magasin.php';
+        require 'c-admin.php';
         break;
     case 'Modo':
-        header('Location: controllers/c-modo.php');
+        require 'c-modo.php';
         break;
     case 'Client':
-        header('Location: controllers/c-client.php');
+        require 'c-client.php';
         break;
 }
 

@@ -1,3 +1,61 @@
+<?php
+// Include your database connection file
+include 'db.php';
+
+$nomOptions = '';
+$typeOptions = '';
+
+
+// --------------------------------------------------------
+//                 MODIFICATION MAGASIN
+// --------------------------------------------------------
+
+// Fetch options for Nom dropdown
+$nomQuery = "SELECT shop_name FROM shop";
+$nomResult = $bd->query($nomQuery);
+while ($row = $nomResult->fetch(PDO::FETCH_ASSOC)) { // Corrected to fetch(PDO::FETCH_ASSOC)
+    $nomOptions .= "<option value='" . htmlspecialchars($row['shop_name']) . "'>" . htmlspecialchars($row['shop_name']) . "</option>";
+}
+
+// Fetch options for Type dropdown
+$typeQuery = "SELECT type_name FROM shop_type";
+$typeResult = $bd->query($typeQuery);
+while ($row = $typeResult->fetch(PDO::FETCH_ASSOC)) { // Corrected to fetch(PDO::FETCH_ASSOC)
+    $typeOptions .= "<option value='" . htmlspecialchars($row['type_name']) . "'>" . htmlspecialchars($row['type_name']) . "</option>";
+}
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $selectedNom = $_POST['nom'];
+    $nomTextBox = $_POST['nomTextBox'];
+    $selectedType = $_POST['type'];
+
+    // SQL to update the shop table
+    $updateQuery = "UPDATE shop SET shop_name = ?, shop_type_Fk = (SELECT shop_type_id FROM shop_type WHERE type_name = ?) WHERE shop_name = ?";
+
+    // Prepare and execute query (Prevents SQL Injection)
+    $stmt = $bd->prepare($updateQuery);
+    $stmt->bindParam(1, $nomTextBox);
+    $stmt->bindParam(2, $selectedType);
+    $stmt->bindParam(3, $selectedNom);
+    if ($stmt->execute()) {
+        // Refresh the page after successful update
+        header("Location: ".$_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo "<p>Error updating record: " . htmlspecialchars($bd->errorInfo()[2]) . "</p>";
+    }
+
+    
+}
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,31 +123,36 @@
 <body>
 
     <div class="big-box">
-        <form class="small-box" action="/submit-url" method="post">
-            <div>Modification Magasin</div>
-            <div>
-                <label for="nom">Nom</label>
-                <select id="nom">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 20px;"></div>
-            <div>
-                <label for="nomTextBox">Nom</label>
-                <input type="text" id="nomTextBox" />
-            </div>
-            <div>
-                <label for="type">Type</label>
-                <select id="type">
-                    <option value="type1">Type 1</option>
-                    <option value="type2">Type 2</option>
-                </select>
-            </div>
-            <div class="button-container">
-                <input type="submit" class="centered-button" value="Modifier">
-            </div>
-        </form>
+    <form class="small-box" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div>Modification Magasin</div>
+
+        <!-- Nom Dropdown -->
+        <div>
+            <label for="nom">Nom</label>
+            <select id="nom" name="nom">
+                <?php echo $nomOptions; ?>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 20px;"></div>
+
+        <div>
+            <label for="nomTextBox">Nom</label>
+            <input type="text" id="nomTextBox" name="nomTextBox" />
+        </div>
+
+        <!-- Type Dropdown -->
+        <div>
+            <label for="type">Type</label>
+            <select id="type" name="type">
+                <?php echo $typeOptions; ?>
+            </select>
+        </div>
+
+        <div class="button-container">
+            <input type="submit" class="centered-button" value="Modifier">
+        </div>
+    </form>
     
         <form class="small-box" action="/submit-url" method="post">
             <div>Ajout Type</div>

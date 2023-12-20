@@ -1,23 +1,33 @@
 <?php
-// Include your database connection file
+// Place this at the top of your file
 include('db.php');
 
-// Function to handle order placement
-function placeOrder($pdo, $productId, $quantity, $stateId) {
-    $userId = 1; // Replace with actual user ID, e.g., from a session variable
-    $stmt = $pdo->prepare("INSERT INTO `order` (product_Fk, client_user_id_Fk, quantity, state_Fk, date) VALUES (:productId, :userId, :quantity, :stateId, NOW())");
-    $stmt->bindParam(':productId', $productId);
-    $stmt->bindParam(':userId', $userId);
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':stateId', $stateId);
+function placeOrder($pdo, $productId, $quantity, $stateId, &$productName) {
+    $userId = 1; // Replace with actual user ID from session or authentication system
+
+    // Fetch the product name for the confirmation message
+    $productStmt = $pdo->prepare("SELECT Souvenir_name FROM product WHERE product_id = :productId");
+    $productStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+    $productStmt->execute();
+    $product = $productStmt->fetch(PDO::FETCH_ASSOC);
+    $productName = $product ? $product['Souvenir_name'] : '';
+
+    // Insert the order into the database
+    $stmt = $pdo->prepare("INSERT INTO `order` (product_Fk, client_user_id_Fk, quantity, date, state_Fk) VALUES (:productId, :userId, :quantity, NOW(), :stateId)");
+    $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+    $stmt->bindParam(':stateId', $stateId, PDO::PARAM_INT);
     return $stmt->execute();
 }
 
-// Check for order form submission
 $orderPlaced = false;
+$orderedProductName = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_product_id'])) {
     $product_id = intval($_POST['order_product_id']);
-    $orderPlaced = placeOrder($bd, $product_id, 1, 1); // Quantity and stateId are hardcoded for now
+    if (placeOrder($bd, $product_id, 1, 1, $orderedProductName)) {
+        $orderPlaced = true;
+    }
 }
 
 // Initialize variables for filters
@@ -129,7 +139,7 @@ th, td {
 <body>
 
 <?php if ($orderPlaced): ?>
-    <p>Order placed successfully!</p>
+    <p>Order placed successfully for <?= htmlspecialchars($orderedProductName) ?>!</p>
 <?php endif; ?>
 
 <div class="container">

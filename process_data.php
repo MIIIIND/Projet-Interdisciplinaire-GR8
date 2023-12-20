@@ -1,20 +1,34 @@
 <?php
+// Include the database connection file
+ob_start
+include 'db.php';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $selectedShop = $_POST['shopSelect'];
 
-    // Get the selected shop value from the form submission
-    $selectedShop = $_POST['selectedShop'];
+    
+    $sql = "SELECT 
+                p.souvenir_name, 
+                p.price, 
+                SUM(o.quantity) AS total_quantity
+            FROM 
+                product p
+            JOIN 
+                shop s ON p.shop_id_Fk = s.shop_id
+            LEFT JOIN 
+                `order` o ON p.product_id = o.product_Fk
+            WHERE 
+                s.shop_name = :shop_name
+            GROUP BY 
+                p.product_id";
 
-    // Use the selected shop value in your SQL query
-    $sql = "SELECT * FROM your_table_name WHERE shop_column = '$selectedShop'";
-    $result = $conn->query($sql);
+    $stmt = $bd->prepare($sql);
+    $stmt->bindParam(':shop_name', $selectedShop, PDO::PARAM_STR);
+    $stmt->execute();
 
-    // Process and display the result as needed
-    if ($result->num_rows > 0) {
-        // Your table display code here
-    } else {
-        echo "0 results";
-    }
-
-    // Close the connection
-    $conn->close();
+    
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['query_results'] = $results; 
+}
 ?>

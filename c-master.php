@@ -5,13 +5,13 @@ session_start();
 deconnexion();
 switch ($_SESSION['role']) {
     case 'Admin':
-        require 'views/v-Magasin.php';
+        header('Location: c-admin.php');
         break;
     case 'Modo':
-        header('Location: controllers/c-modo.php');
+        header('Location: c-modo.php');
         break;
     case 'Client':
-        header('Location: controllers/c-client.php');
+        header('Location: c-client.php');
         break;
 }
 

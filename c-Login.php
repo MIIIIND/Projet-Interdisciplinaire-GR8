@@ -48,9 +48,11 @@ function loginDB() {
             break;
         case '2':
             $_SESSION['role']='Modo';
+            header('Location: c-master.php');
             break;
         case '3':
             $_SESSION['role']='Client';
+            header('Location: c-master.php');
             break;
     }
 }

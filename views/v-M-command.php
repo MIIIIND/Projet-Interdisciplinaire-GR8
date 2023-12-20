@@ -1,6 +1,7 @@
 <?php 
 $title = "Magasin";
-$content = ?>
+$content = "a";
+?>
 	<a href="modo.php"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
 	<p>nom prenom logement</p>
 	<p>article</p>

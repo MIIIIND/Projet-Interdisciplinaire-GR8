@@ -1,11 +1,14 @@
-<?php 
-require_once 'model.php';
-$DB = new bd();
+<?php
+require_once 'models/m-User.php';
+$user_db = new User();
 
-function login() {
-    require 'config.php';
-    if ($LOGIN_METHOD == 1) {loginDB();}
-    else {loginLDAP();}
+function connexion(){
+    require 'views/v-Login.php';
+    if ( isset($_POST['connexion']) ) {
+        require 'config.php';
+        if ($LOGIN_METHOD == 1) {loginDB();}
+        else {loginLDAP();}
+    }
 }
 
 function loginLDAP() {
@@ -30,10 +33,10 @@ function loginLDAP() {
 }
 
 function loginDB() {
-    global $DB;
+    global $user_db;
     $login = trim($_POST['login']);
     $password = trim($_POST['password']);
-    $user = $DB->getUser($login, $password);
+    $user = $user_db->getUser($login, $password);
     if ($user == null) {
         echo "Erreur dans le login ou le mot de passe";
         return;
@@ -41,7 +44,7 @@ function loginDB() {
     switch ($user->role_Fk) {
         case '1':
             $_SESSION['role']='Admin';
-            header('Location: VueMagasin.php');
+            header('Location: c-master.php');
             break;
         case '2':
             $_SESSION['role']='Modo';
@@ -51,5 +54,4 @@ function loginDB() {
             break;
     }
 }
-
 ?>

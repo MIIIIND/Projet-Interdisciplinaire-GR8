@@ -1,8 +1,1 @@
-<?php
-require 'c-Login.php';
-session_start();  
-
-connexion();
-
-
-?>
+// FILEPATH: /c:/Users/Utilisateur/Documents/projet intedisciplinaire/Projet-Interdisciplinaire-GR8/index.php

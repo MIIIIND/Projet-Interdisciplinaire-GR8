@@ -36,11 +36,13 @@ class DB {
         if ($params == null) {
             $results = $this->getDB()->query($sql); // exécution directe
             $results->setFetchMode(PDO::FETCH_OBJ);
+            #$results->closeCursor();
         }
         else {
             $results = $this->getDB()->prepare($sql);  // requête préparée
             $results->execute($params);
             $results->setFetchMode(PDO::FETCH_OBJ);
+            #$results->closeCursor();
         }
         return $results;
     }

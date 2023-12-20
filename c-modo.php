@@ -1,8 +1,11 @@
 <?php
-require 'c-deconnect.php';
-session_start();
+require 'models/m-Shop.php';
+$shop = new Shop();
 
-require 'views/v-M-command.php';
-deconnexion();
+if (isset($_POST['set_schedules'])) {
+    $shop->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $user_id);
 
+}
+
+require 'views/v-Magasin.php';
 ?>

@@ -17,5 +17,10 @@ class Shop extends DB {
             #throw new Execption("le magasin on le connais pas'$idMag'");
             echo "le magasin on le connais pas'$idMag'";
     }
+
+    public function setSchedules($open_h, $close_h, $user_id) {
+        $sql = 'UPDATE shop SET opens_at=?, closes_at=? WHERE manager_user_id_Fk=?';
+        $this->executeRequest($sql, array($open_h, $close_h, (int) $user_id));
+    }
 }
 ?>

@@ -40,17 +40,20 @@ $noms = $nomQuery->fetchAll(PDO::FETCH_ASSOC);
 
 // Handle Modify Moderator Form
 if (isset($_POST['modify_modo'])) {
-  $stmt = $bd->prepare("UPDATE user SET second_name = :prenom, password = :mdp WHERE second_name = :nom");
-  $stmt->bindParam(':nom', $nom);
-  $stmt->bindParam(':prenom', $prenom);
-  $stmt->bindParam(':mdp', $mdp);
+    $stmt = $bd->prepare("UPDATE user SET second_name = :prenom, password = :mdp WHERE second_name = :nom");
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':prenom', $prenom);
+    $stmt->bindParam(':mdp', $mdp);
 
-  // Set parameters and execute
-  $nom = $_POST['NomSelectModif'];
-  $prenom = $_POST['PrenomTextboxModif'];
-  $mdp = $_POST['MDPTextboxModif'];
-  $stmt->execute();
-  // Add error handling as necessary
+    // Set parameters and execute
+    $nom = $_POST['NomSelectModif'];
+    $prenom = $_POST['PrenomTextboxModif'];
+    $mdp = $_POST['MDPTextboxModif'];
+    $stmt->execute();
+
+    // Redirect to the same page to refresh
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
 }
 ?>
 
@@ -111,7 +114,7 @@ if (isset($_POST['modify_modo'])) {
                     <form method="post" action="">
                         <p>Modif modo</p>
                         <p><span>Nom</span><span class="interaction-box">
-                        <select id="NomSelectSup2" name="NomSelectSup">
+                        <select id="NomSelectSup2" name="NomSelectModif">
                                 <option value="" disabled selected>Select a Nom</option>
                                 <?php foreach ($noms as $nom): ?>
                                     <option value="<?php echo htmlspecialchars($nom['second_name']); ?>">
@@ -120,7 +123,7 @@ if (isset($_POST['modify_modo'])) {
                                 <?php endforeach; ?>
                             </select>
                         </span></p>
-                        <p><span>Prenom</span><span class="interaction-box"><input type="text" id="PrenomTextboxModif" name="PrenomTextboxModif"></span></p>
+                        <p><span>Nouveau Nom</span><span class="interaction-box"><input type="text" id="PrenomTextboxModif" name="PrenomTextboxModif"></span></p>
                         <p><span>Magasin</span><span class="interaction-box">
                         <select id="MagasinSelectAjout2" name="MagasinSelectAjout">
                                 <option value="" disabled selected>Select a Magasin</option>

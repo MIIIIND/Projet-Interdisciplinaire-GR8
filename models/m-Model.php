@@ -17,7 +17,7 @@ class DB {
     }
     */
 
-    private function getDB(){
+    public function getDB(){
         if ($this->db==null) {
             date_default_timezone_set('Europe/Brussels');
             try {

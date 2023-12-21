@@ -5,7 +5,7 @@ $LOGIN_METHOD = 1; # 0 = login with AD, 1 = login with DB
 
 # Database configuration
 $hoteDB='localhost';
-$nomBD='isim_parc';
+$nomBD='5';
 $userDB='root';
 $mdpDB=''; 
 

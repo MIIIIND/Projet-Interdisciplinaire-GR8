@@ -37,7 +37,19 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['action']) && $_POST['action'] == 'selectShop') {
-            // ... existing code for selectShop action ...
+            $selectedShop = $_POST['shopSelect'];
+            $sql = "SELECT p.souvenir_name, p.price, SUM(o.quantity) AS total_quantity,
+                        (p.price * SUM(o.quantity)) AS ca
+                    FROM product p
+                    JOIN shop s ON p.shop_id_Fk = s.shop_id
+                    LEFT JOIN `order` o ON p.product_id = o.product_Fk
+                    WHERE s.shop_name = :selectedShop
+                    GROUP BY p.product_id";
+
+            $stmt = $bd->prepare($sql);
+            $stmt->bindParam(':selectedShop', $selectedShop, PDO::PARAM_STR);
+            $stmt->execute();
+            $_SESSION['query_results'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         elseif (isset($_POST['action']) && $_POST['action'] == 'filterResults') {
             $minPrice = $_POST['minPrice'];

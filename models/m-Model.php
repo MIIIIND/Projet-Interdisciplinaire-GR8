@@ -2,7 +2,7 @@
 class DB {
     private $db;
 
-    public function getDB(){
+    public function getDB(){ // Cette fonction devrait être privée mais dû à notre structure semi-MVC, elle est publique x)
         if ($this->db==null) {
             date_default_timezone_set('Europe/Brussels');
             try {

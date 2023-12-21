@@ -1,18 +1,3 @@
-<?php
-require 'm-Comment.php';
-$COMMENT= new Comment();
-
-$shop_id = $_SESSION['shop_id'] = 4;
-
-$cater=$COMMENT->getShopComments($shop_id);
-
-if (isset($_POST['supprimer'])) {
-  $COMMENT->delComment($_POST['comment_id']);
-  header("Location: gestion_commentaires.php");
-  exit();
-}
-?>
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -31,8 +16,7 @@ if (isset($_POST['supprimer'])) {
 		<input type="hidden" name="comment_id" value="' . $data->comment_id . '">
         <input type="submit" name="supprimer" value="supprimer">
     </form>';
-	}
-?>		
+	} ?>		
   </main>
   <?php require '_footer.html'; ?>
 </body>

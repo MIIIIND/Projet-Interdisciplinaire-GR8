@@ -25,7 +25,7 @@ if (isset($_POST['Envoi'])) {
 	<ul>
 		<li><a href="gestion_articles.php">Gestion des article et des types</a></li>
 		<li><a href="gestion_comandes.php">Gestion des commande</a></li>
-		<li><a href="gestion_commentaires.php">Gestion des commentaire</a></li>
+		<li><a href="c-gestion_commentaires.php">Gestion des commentaire</a></li>
 	</ul>
 	<div>
 		<form method="post">

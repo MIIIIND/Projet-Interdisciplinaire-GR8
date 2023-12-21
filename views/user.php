@@ -2,7 +2,7 @@
 // Place this at the top of your file
 
 function placeOrder($pdo, $productId, $quantity, $stateId, &$productName) {
-    $userId = 1; // Replace with actual user ID from session or authentication system
+    $userId = $_SESSION['user_id']; // Replace with actual user ID from session or authentication system
 
     // Fetch the product name for the confirmation message
     $productStmt = $pdo->prepare("SELECT Souvenir_name FROM product WHERE product_id = :productId");

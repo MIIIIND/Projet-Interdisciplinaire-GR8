@@ -133,8 +133,12 @@
                 if (empty($filterText) || stripos($row['souvenir_name'], $filterText) !== false) {
                     echo "<tr><td>" . htmlspecialchars($row['souvenir_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['price']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['total_quantity']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['ca']) . "</td></tr>";
+                    if (($row['total_quantity'])== NULL){
+                        echo "<td>0</td>";
+                    }else {echo "<td>" .htmlspecialchars($row['total_quantity']). "</td>";}
+                    if (($row['ca'])== NULL){
+                        echo "<td>0</td>";
+                    }else {echo "<td>" . htmlspecialchars($row['ca']) . "</td></tr>";}
                 }
             }
             echo "</table>";

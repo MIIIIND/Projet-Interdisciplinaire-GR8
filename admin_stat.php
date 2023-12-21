@@ -34,8 +34,8 @@
 <body>
 <?php
 require 'models/m-Model.php';
-$BD = new DB();
-$bd = $BD->getDB();
+    $BD = new DB();
+    $bd = $BD->getDB();
     require 'views/_header.html';
     // Initialize filter variables
     $minPrice = $maxPrice = $minQuantity = $maxQuantity = "";

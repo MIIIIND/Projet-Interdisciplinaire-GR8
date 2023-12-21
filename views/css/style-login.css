@@ -1,0 +1,101 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    color: white;
+}
+
+/* General */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-image: url('/Projet-Interdisciplinaire-GR8/views/img/background.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h2 {
+    padding-top: 50px;
+    font-size: 2em;
+}
+
+/* Footer */
+body::after {
+    content: '';
+    display: block;
+    height: 60px;
+}
+
+footer {
+    background-color: #333333c6;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+
+/* special divs */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Login page */
+.login {
+    margin: 0 auto;
+    margin-top: 2%;
+    padding: 50px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: #2f59cdc6;
+    color: white;
+}
+
+.login img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.login input {
+    margin-bottom: 10px;
+    color: black;
+}
+
+.login input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+}
+
+.login input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+    background-color: #5c5c5c;
+}

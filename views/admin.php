@@ -116,74 +116,21 @@ if ( isset($_POST['statistique']) ) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="views/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Apply some basic styling */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        /* Style for the big box */
-        .big-box {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            grid-template-rows: repeat(2, 1fr);    /* 2 rows */
-            gap: 20px; /* Adjust the gap between smaller boxes */
-            width: 800px; /* Set the width of the big box */
-            height: 600px; /* Set the height of the big box */
-            border: 2px solid #333; /* Border for the big box */
-            padding: 10px; /* Padding for the big box */
-        }
-
-        /* Style for the smaller boxes */
-        .small-box {
-            border: 1px solid #666; /* Border for the smaller boxes */
-            padding: 10px; /* Padding for the smaller boxes */
-            text-align: center; /* Align text to the center */
-            position: relative; /* Set position to relative for absolute positioning */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%; /* Make the small box take full height */
-        }
-
-        /* Style for the combo box and text box */
-        select, input {
-            width: 100%; /* Make combo box and text box fill the container */
-            margin-top: 5px; /* Add some space at the top */
-            margin-bottom: 10px; /* Add some space at the bottom */
-        }
-
-        /* Style for the centered button */
-        .centered-button {
-            text-align: center;
-            padding: 10px; /* Add padding for better visibility */
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: auto; /* Center the button */
-        }
-
-        /* Style to push the button to the bottom */
-        .button-container {
-            margin-top: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+  <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
+  <title>Isims Parc | Administration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <?php require '_header.html';?>
     <div class="big-box">
         <!-- Modification Form -->
     <form class="small-box" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div>Modification Magasin</div>
+        <h3>Modification Magasin</h3>
 
         <!-- Nom Dropdown -->
         <div>
@@ -215,7 +162,7 @@ if ( isset($_POST['statistique']) ) {
     
     <!-- Ajout Magasin Form -->
         <form class="small-box" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <div>Ajout de Magasin</div>
+        <h3>Ajout de Magasin</h3>
         <div>
             <label for="nomMagasin">Nom</label>
             <input type="text" id="nomMagasin" name="nomMagasin" />
@@ -242,7 +189,7 @@ if ( isset($_POST['statistique']) ) {
         
     
         <form class="small-box" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <div>Ajout de type de magasin</div>
+            <h3>Ajout de type de magasin</h3>
             <div>
                 <label for="AjoutTypeMagasin">Nom</label>
                 <input type="text" id="AjoutTypeMagasin" name="AjoutTypeMagasin" />
@@ -254,7 +201,8 @@ if ( isset($_POST['statistique']) ) {
 
 
         <form class="small-box" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <div>Suppression de Type de magasin</div>
+            <h3>Suppression de Type de magasin</h3>
+            <p></p>
             <div>
                 <label for="typeToDelete">Type</label>
                 <select id="typeToDelete" name="typeToDelete">

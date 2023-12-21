@@ -1,0 +1,265 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+}
+
+/* General */
+html, body {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right top, #f4f4f4, #d8d9ee, #b5bfe8, #8aa9e3, #4a94dd);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h2 {
+    padding-top: 50px;
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.25em;
+    padding: 10px;
+}
+
+
+
+/* Header */
+header {
+    background-color: #2f59cd70;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header h1 {
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+header input[type=submit] {
+    background-color: #2f59cda9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+header input[type=submit]:hover {
+    background-color: #2f59cd;
+}
+
+/* Footer */
+
+
+footer {
+    background-color: #333333c6;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 60px;
+}
+
+/* special divs */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+input[type=time], input[type=date] {
+    padding: 5px; /* Add padding to the combo box */
+    border-radius: 5px; /* Add rounded corners */
+    border: 1px solid #ccc; /* Add a grey border */
+    background-color: #fff; /* Add a white background color */
+    cursor: pointer; /* Add a pointer cursor on mouse-over */
+    width: 75px;
+}
+
+input[type=submit] {
+    background-color: #2f59cda9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button {
+    background-color: #2f59cda9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #2f59cd;
+}
+
+li a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #2f59cda9;
+    color: white;
+    border-radius: 10px;
+}
+
+li a:hover {
+    background-color: #2f59cd;
+}
+
+ul {
+    margin: 20px auto;
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+select, input {
+    width: 100%; /* Make combo box and text box fill the container */
+    margin-top: 5px; /* Add some space at the top */
+    margin-bottom: 10px; /* Add some space at the bottom */
+}
+
+select, input[type=text] {
+    padding: 5px; /* Add padding to the combo box */
+    border-radius: 5px; /* Add rounded corners */
+    border: 1px solid #ccc; /* Add a grey border */
+    background-color: #fff; /* Add a white background color */
+    cursor: pointer; /* Add a pointer cursor on mouse-over */
+    
+}
+
+.center_hor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #7493e8a7;
+    width: 20%;
+    border-radius: 20px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.centered-button {
+    text-align: center;
+    padding: 10px;
+    background-color: #2f59cdc6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto; /* Center the button */
+}
+
+.button-container {
+    margin-top: auto;
+}
+
+.big-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(2, 1fr);    /* 2 rows */
+    gap: 20px; /* Adjust the gap between smaller boxes */
+    width: 800px; /* Set the width of the big box */
+    height: 600px; /* Set the height of the big box */
+    padding: 10px; /* Padding for the big box */
+    margin: 25px auto; /* Center the big box */
+}
+
+.small-box {
+    background-color: #7493e8a7;
+    border-radius: 15px;
+    padding: 10px; /* Padding for the smaller boxes */
+    text-align: center; /* Align text to the center */
+    position: relative; /* Set position to relative for absolute positioning */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Make the small box take full height */
+
+}
+
+.big-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* vue user */
+.container {
+    display: flex;
+    height: 100%;
+}
+.filter-bar {
+    background: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.filter-btn {
+    margin-right: 10px;
+}
+.filter-types {
+    display: flex;
+}
+.type-btn {
+    margin-right: 5px;
+}
+.content {
+    flex-grow: 1;
+    padding: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+th {
+    background-color: #2f59cd70;
+    color: #ffffff;
+    text-align: left;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+.sidebar {
+    width: 200px;
+    background: #2f59cd70;
+    padding: 10px;
+}
+.filter-form {
+    display: flex;
+    flex-direction: column;
+}

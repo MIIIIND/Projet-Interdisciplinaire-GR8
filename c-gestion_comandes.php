@@ -13,9 +13,9 @@ try {
     exit();
 }
 
-require 'm-Order.php';
-require 'm-User.php';
-require 'm-Shop.php';
+require 'models/m-Order.php';
+require 'models/m-User.php';
+require 'models/m-Shop.php';
 $USER = new user();
 $ORDER = new Order();
 $SHOP = new Shop();
@@ -37,13 +37,20 @@ if (isset($_POST['facturer'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
     <title>Isims Parc | Gestion commandes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<?php require '_header.html'; ?>
-<main class="">
-    <a href="modo.php">Retour</a>
+<?php require 'views/_header.html'; ?>
+<main>
+    <ul>
+        <li><a href="/Projet-Interdisciplinaire-GR8/c-modo.php">Retour</a></li>
+    </ul>
     <table>
         <tr>
             <th>Client</th>
@@ -78,6 +85,6 @@ if (isset($_POST['facturer'])) {
         <?php endwhile; ?>
     </table>
 </main>
-<?php require '_footer.html'; ?>
+<?php require 'views/_footer.html'; ?>
 </body>
 </html>

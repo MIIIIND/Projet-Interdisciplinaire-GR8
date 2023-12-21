@@ -1,5 +1,5 @@
 <?php
-require 'm-Comment.php';
+require 'models/m-Comment.php';
 $COMMENT= new Comment();
 
 $shop_id = $_SESSION['shop_id'] = 4;
@@ -11,5 +11,5 @@ if (isset($_POST['supprimer'])) {
   header("Location: c-gestion_commentaires.php");
   exit();
 }
-require 'v-gestion_commentaires.php';
+require 'views/v-gestion_commentaires.php';
 ?>

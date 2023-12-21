@@ -70,8 +70,6 @@ foreach ($params as $key => &$value) {
     $productStmt->bindParam($key, $value);
 }
 $productStmt->execute();
-
-        
 ?>
 
 <!DOCTYPE html>
@@ -91,16 +89,7 @@ $productStmt->execute();
 <?php if ($orderPlaced): ?>
     <p>Order placed successfully for <?= htmlspecialchars($orderedProductName) ?>!</p>
 <?php endif; ?>
-<form class="small-box" action="c-client.php" method="post">
-    <div class="button-container">
-        <input type="submit" class="centered-button" name="getMag" value="Magasin">
-    </div>
-</form>
-<form class="small-box" action="c-client.php" method="post">
-    <div class="button-container">
-        <input type="submit" class="centered-button" name="getCommande" value="commande">
-    </div>
-</form>
+
 <div class="container">
     <div class="sidebar">
         <form method="post" class="filter-form">

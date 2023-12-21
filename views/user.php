@@ -1,6 +1,5 @@
 <?php
 // Place this at the top of your file
-include('db.php');
 
 function placeOrder($pdo, $productId, $quantity, $stateId, &$productName) {
     $userId = 1; // Replace with actual user ID from session or authentication system
@@ -137,7 +136,7 @@ th, td {
 <title>Product Catalog</title>
 </head>
 <body>
-
+<?php require '_header.html'?>
 <?php if ($orderPlaced): ?>
     <p>Order placed successfully for <?= htmlspecialchars($orderedProductName) ?>!</p>
 <?php endif; ?>
@@ -189,6 +188,6 @@ th, td {
         </table>
     </div>
 </div>
-
+<?php require '_footer.html'?>
 </body>
 </html>

@@ -114,7 +114,7 @@ if (isset($_POST['modify_modo'])) {
                     <form method="post" action="">
                         <p>Modif modo</p>
                         <p><span>Nom</span><span class="interaction-box">
-                        <select id="NomSelectSup2" name="NomSelectModif">
+                        <select id="NomSelectSup2" name="NomSelectSup">
                                 <option value="" disabled selected>Select a Nom</option>
                                 <?php foreach ($noms as $nom): ?>
                                     <option value="<?php echo htmlspecialchars($nom['second_name']); ?>">

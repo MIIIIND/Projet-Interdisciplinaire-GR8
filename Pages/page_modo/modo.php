@@ -1,7 +1,7 @@
 <?php 
 	date_default_timezone_set('Europe/Brussels');
 	$hote='localhost';
-	$nomBD='testprojetinter';
+	$nomBD='isim_parc';
 	$user='root';
 	$mdp=''; 
 	try {
@@ -33,13 +33,12 @@
     <title>IsimsParc</title>
   </head>
   <body>
-  <?php include 'header.php' ;?>
+  <?php include '_header.html' ;?>
   <main> 	
 	<ul>
-		<li><a href="modo_ges_art.php">Gestion des article et des types</a></li>
-		<li><a href="modo_comand.php">Gestion des commande</a></li>
-		<li><a href="modo_ges_com.php">Gestion des commentaire</a></li>
-		<li><a href="#popup" id="openPopup">Changer l'horraire</a></li>
+		<li><a href="gestion_articles.php">Gestion des article et des types</a></li>
+		<li><a href="gestion_comandes.php">Gestion des commande</a></li>
+		<li><a href="gestion_commentaires.php">Gestion des commentaire</a></li>
 		<div id="popup" class="popup">
 			<div class="popup-content">
 				<a href="#" class="close" id="closePopup"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
@@ -56,17 +55,17 @@
 				?>
 			</div>
 		</div>
+		<!-- 
 		<li><a href="#popup_chat" id="openPopup_chat">Chat</a></li>
 		<div id="popup_chat" class="popup">
 			<div class="popup-content_chat">
 				<a href="#" class="close_chat" id="closePopup_chat"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
 				<div class="chat-content">
-            <!-- Zone de chat -->
             <div class="message">Bienvenue dans le chat !</div>
-            <!-- Ajoutez d'autres messages ici -->
 				</div>
 			</div>
 		</div>
+		-->
 	</ul>
   </main>
   <?php require 'footer.php'; ?>

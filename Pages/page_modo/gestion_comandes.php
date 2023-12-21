@@ -41,10 +41,10 @@ $cater->execute();
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Style.css">
-    <title>IsimsParc</title>
+    <title>Isims Parc | Gestion commandes</title>
 </head>
 <body>
-<?php include 'header.php'; ?>
+<?php require '_header.html'; ?>
 <main class="">
     <a href="modo.php"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
     <?php

@@ -5,6 +5,9 @@ $shop = new Shop();
 $order = new Order();
 # $user_id = $_SESSION['user_id'];
 
+require 'pages/page_modo/modo.php';
+
+/*
 if (isset($_POST['set_schedules'])) {
     $shop->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $user_id);
 }

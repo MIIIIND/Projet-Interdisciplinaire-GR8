@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
     $typeMagasin = $_POST['typeMagasin'];
 
     // SQL to insert a new shop
-    $insertQuery = "INSERT INTO shop (shop_name, shop_type_Fk) VALUES (?, (SELECT shop_type_id FROM shop_type WHERE type_name = ?))";
+    $insertQuery = "INSERT INTO shop (shop_name, shop_type_Fk) VALUES (?, (SELECT shop_type_id FROM shop_type WHERE type_name = ? LIMIT 1))";
 
     // Prepare and execute query
     $stmt = $bd->prepare($insertQuery);

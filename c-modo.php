@@ -5,7 +5,7 @@ $shop = new Shop();
 $order = new Order();
 # $user_id = $_SESSION['user_id'];
 
-require 'pages/page_modo/modo.php';
+header('Location:pages/page_modo/modo.php');
 
 /*
 if (isset($_POST['set_schedules'])) {

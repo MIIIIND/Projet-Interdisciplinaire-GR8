@@ -14,11 +14,15 @@ body {
 
 a {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
 }
 
 h1 {
     font-size: 2.5em;
+}
+
+a h1 {
+    color: white;
 }
 
 h2 {
@@ -34,6 +38,12 @@ header {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+}
+
+footer {
+    width: 100%;
+    padding: 10px;
+    background-color: #7C93C3;
 }
 
 input[type="submit"] {

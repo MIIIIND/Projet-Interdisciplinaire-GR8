@@ -2,21 +2,6 @@
 class DB {
     private $db;
 
-    /*
-    private function setDB() { // connexion à la base de données
-        require 'config.php';
-        self::$db=new PDO('mysql:host='.$hoteDB.';dbname='.$nomBD, $userDB, $mdpDB);
-        self::$db->exec("SET NAMES 'utf8'");
-    }
-
-    private function getDB() { // retourne la base de données
-        if ($this->db==null) {
-            $this->setDB();
-        }
-        return $this->db;
-    }
-    */
-
     private function getDB(){
         if ($this->db==null) {
             date_default_timezone_set('Europe/Brussels');

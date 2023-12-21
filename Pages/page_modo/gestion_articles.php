@@ -15,12 +15,13 @@ catch (Exception $e) {
 
 require 'm-Product.php';
 $PRODUCT = new Product();
-$shop_id = 0;
+$shop_id = 1;
 
 function getProducts() {
 	global $bd;
-	$products = $bd->prepare("SELECT * FROM product;");
-	$products->execute();
+	global $shop_id;
+	$products = $bd->prepare("SELECT * FROM product WHERE shop_id_Fk=?;");
+	$products->execute(array($shop_id));
 	return $products;
 }
 
@@ -54,7 +55,7 @@ if (isset($_POST['Envoyer1'])) {
 
 // Supression article
 if (isset($_POST['Envoyer2'])) {
-	$PRODUCT->delProduct($_POST['Nom_sup']);
+	$PRODUCT->delProduct($_POST['Nom_sup'], $shop_id);
 	header('Location:gestion_articles.php');
 	exit();
 }
@@ -82,8 +83,8 @@ if (isset($_POST['Envoyer4'])) {
   </head>
   <body>
   <?php include '_header.html' ;?>
-  <main class="modo_art"> 	
-	<a href="modo.php"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
+  <main class="modo_art">
+	<a href="modo.php">Retour</a>
 	<!-- Modifier article -->
 	 <form method="post" action="gestion_articles.php">
         <h1>Modifier article</h1>
@@ -167,7 +168,7 @@ if (isset($_POST['Envoyer4'])) {
 		<input type="submit" name="Envoyer4" value="Envoyer" >
 	</form>
   </main>
-  <?php require 'footer.php'; ?>
+  <?php require '_footer.html'; ?>
   </body>
 
 </html>

@@ -1,43 +1,16 @@
-<?php
+<?php 
 require 'models/m-Shop.php';
-require 'models/m-Order.php';
-$shop = new Shop();
-$order = new Order();
-# $user_id = $_SESSION['user_id'];
+$SHOP = new Shop();
+session_start();
 
-header('Location:pages/page_modo/modo.php');
+$_SESSION['user_id'] = 2;
+$shop_id = $SHOP->getShopFromOwner($_SESSION['user_id'])->fetch()->shop_id;
+$_SESSION['shop_id'] = $shop_id;
 
-/*
-if (isset($_POST['set_schedules'])) {
-    $shop->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $user_id);
+if (isset($_POST['Envoi'])) {
+	$SHOP->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $shop_id);
+	header('Location: modo.php');
+	exit();
 }
-
-$action = $_GET['action'];
-$action_wl = array('Gestion articles', 'Gestion commentaires', 'Gestion commandes');
-if (!in_array($action, $action_wl)) {
-    $action = 'Gestion commandes';
-}
-
-switch ($action) {
-    case 'Gestion articles':
-        echo 1;
-        break;
-    case 'Gestion commentaires':
-        echo 2;
-        break;
-    default:
-        $order->getOrders($user_id);
-        break;
-}
-
-require 'views/v-Magasin.php';
-
-/*# $user_id = $_SESSION['user_id'];
-
-if (isset($_POST['set_schedules'])) {
-    $shop->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $user_id);
-}
-
-
-require 'views/modo.php';*/
+require 'views/v-modo.php'
 ?>

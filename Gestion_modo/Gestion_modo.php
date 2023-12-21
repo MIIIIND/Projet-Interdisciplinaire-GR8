@@ -60,7 +60,7 @@ if (isset($_POST['modify_modo'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Your existing head content -->
+  
 </head>
 <body>
     <div class="container">

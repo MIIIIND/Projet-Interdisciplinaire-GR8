@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_comment'])) {
             $stmt->execute([$shop_id]);
             
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $html .= "<tr><td>" . htmlspecialchars($row['content']) . "</td><td>" . htmlspecialchars($row['score']) . "</td></tr>";
+                $html .= "<tr><td>" . htmlspecialchars($row['score']) . "</td><td>" . htmlspecialchars($row['content']) . "</td></tr>";
             }
         }
         return $html;
@@ -58,8 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_comment'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shop Comments</title>
-    <link rel="stylesheet" href="views/style.css">
+    <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
+    <title>Isims Parc | Suivi commandes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: Arial, sans-serif; }
         .container { width: 80%; margin: 20px auto; }
@@ -71,40 +76,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_comment'])) {
 </head>
 <body>
 <?php require 'views/_header.html'?>
-<div class="container">
-    <h1>Submit and View Shop Comments</h1>
-    
-    <!-- Dropdown Menu for Shop Selection -->
-    <form action="shop_client_view.php" method="post">
-        <label for="shop_dropdown">Select Shop:</label>
-        <select name="shop_dropdown" id="shop_dropdown" onchange="this.form.submit()">
-            <option value="">Select Shop</option>
-            <?php echo populateDropdown($bd, $selected_shop_id); ?>
-        </select>
-    </form>
-    
-    <!-- Comment Submission Form -->
-    <form action="shop_client_view.php" method="post">
-        <textarea name="comment_content" placeholder="Type your comment here..."></textarea>
-        <input type="number" name="score" min="1" max="5" placeholder="Score (1-5)">
-        <input type="hidden" name="shop_dropdown" value="<?php echo $selected_shop_id; ?>">
-        <button type="submit" name="submit_comment">Submit Comment</button>
-    </form>
+<h2>Avis sur les boutique</h2>
+<ul>
+    <li><a href="c-client.php">Retour</a></li>
+</ul>
+    <div class="review_form">
+        <!-- Dropdown Menu for Shop Selection -->
+        <form method="post">
+            <label for="shop_dropdown"><h4>Sélectionner un boutique :</h4></label>
+            <select name="shop_dropdown" id="shop_dropdown" onchange="this.form.submit()">
+                <option value="">Select Shop</option>
+                <?php echo populateDropdown($bd, $selected_shop_id); ?>
+            </select>
+        </form>
+        
+        <!-- Comment Submission Form -->
+        <form method="post">
+            <textarea name="comment_content" placeholder="Écrivez votre commentaire ici."></textarea>
+            <input type="number" name="score" min="1" max="5" placeholder="Score (1-5)">
+            <input type="hidden" name="shop_dropdown" value="<?php echo $selected_shop_id; ?>">
+            <button type="submit" name="submit_comment">Envoyer</button>
+        </form>
+    </div>
 
     <!-- Comments Table -->
-    <table>
+    <?php if(!empty($comments_html)) {
+        echo '<table>
         <tr>
-            <th>Comment</th>
-            <th>Score</th>
+            <th>Note</th>
+            <th>Commentaire</th>
         </tr>
-        <?php echo $comments_html; ?>
-    </table>
+        '.$comments_html.'
+    </table>';
+    } elseif (!empty($_POST['shop_dropdown'])) {
+        echo '<p>Aucun commentaire pour cette boutique.</p>';
+    } ?>
 </div>
-<form class="small-box" action="c-client.php" method="post">
-    <div class="button-container">
-        <input type="submit" class="centered-button" name="backClient" value="Retour">
-    </div>
-</form>
 <?php require 'views/_footer.html'?>
 </body>
 </html>

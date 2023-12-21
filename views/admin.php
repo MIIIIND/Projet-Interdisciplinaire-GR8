@@ -108,8 +108,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
 
 // Get page statistique
 if ( isset($_POST['statistique']) ) {
-    require 'admin_stat.php';
+    header("Location:admin_stat.php");
     } 
+    
+    if ( isset($_POST['GestionModo']) ) {
+        header("Location:Gestion_modo.php");
+        }   
     
 ?>
 
@@ -221,9 +225,6 @@ if ( isset($_POST['statistique']) ) {
         </form>
     </div>
     <?php // Get page Gestion des modo
-if ( isset($_POST['GestionModo']) ) {
-    require 'Gestion_modo.php';
-    } 
     require '_footer.html';
     ?>
 </body>

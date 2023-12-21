@@ -27,7 +27,7 @@ $shop_id =$SHOP->getShopFromOwner($_SESSION['user_id'])->fetch()->shop_id;
 $cater = $bd->prepare("SELECT o.order_id, o.quantity, o.date, o.state_Fk, os.state_name, u.user_id, u.first_name, u.second_name, u.bill, c.name AS cottage_name, p.Souvenir_name, p.price FROM `order` AS o JOIN `order_state` AS os ON os.order_state_id = o.state_Fk JOIN `user` AS u ON o.client_user_id_Fk = u.user_id JOIN `cottage` AS c ON u.stays_at_Fk = c.cottage_id JOIN `product` AS p ON o.product_Fk = p.product_id WHERE shop_id_Fk=?;");
 $cater->execute(array($shop_id));
 
-if (isset($_POST['facturer']) && isset($_POST['order_id'])) {
+if (isset($_POST['facturer'])) {
     $USER->updateBill($_POST['price'], $_POST['user_id']);
     header('Location: gestion_comandes.php');
     exit();
@@ -71,7 +71,7 @@ if (isset($_POST['facturer']) && isset($_POST['order_id'])) {
                         <?php endwhile; ?>
                     </select>
                 </td>
-                <td><input type="submit" name="vali_com" value="avancer l'état de suivi"></td>
+                <td><input type="submit" name="vali_com" value="Modifier l'état"></td>
                 <td><input type="submit" name="facturer" value="facturer"></td>
             </tr>
         </form>

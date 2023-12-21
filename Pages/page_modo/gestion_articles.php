@@ -15,7 +15,7 @@ catch (Exception $e) {
 
 require 'm-Product.php';
 $PRODUCT = new Product();
-$shop_id = 1;
+$shop_id = $_SESSION['shop_id'] = 4;
 
 function getProducts() {
 	global $bd;

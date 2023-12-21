@@ -9,7 +9,7 @@
   <title>Isims Parc | <?= $title; ?></title>
 </head>
 <body>
-  <?php require '_header.html'; ?>
+  <?php require '_header.php'; ?>
   <div class="center">
     <h2><?= $title; ?></h2>
     <?= $content; ?>

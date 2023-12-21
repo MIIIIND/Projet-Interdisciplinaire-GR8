@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Europe/Brussels');
 $hote = 'localhost';
-$nomBD = 'testprojetinter';
+$nomBD = 'isim_parc';
 $user = 'root';
 $mdp = '';
 
@@ -27,7 +27,7 @@ $cater->execute();
     <title>IsimsParc</title>
   </head>
   <body>
-  <?php include 'header.php' ;?>
+  <?php require '_header.html' ;?>
   <main> 	
 	<a href="modo.php"><img src="img/flecherouge.png" alt="revenir en arrière"></a>
 	<?php

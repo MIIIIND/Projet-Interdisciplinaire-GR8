@@ -1,7 +1,7 @@
 <?php 
 require_once 'm-Model.php';
 
-class Shop extends DB {
+class Order extends DB {
     public function getAllShops()  { // retourne tous les magasins
         $sql = 'SELECT * from shop';
         $shops = $this->executeRequest($sql);
@@ -16,6 +16,11 @@ class Shop extends DB {
         else
             #throw new Execption("le magasin on le connais pas'$idMag'");
             echo "le magasin on le connais pas'$idMag'";
+    }
+
+    public function setSchedules($open_h, $close_h, $user_id) {
+        $sql = 'UPDATE shop SET opens_at=?, closes_at=? WHERE manager_user_id_Fk=?';
+        $this->executeRequest($sql, array($open_h, $close_h, (int) $user_id));
     }
 }
 ?>

@@ -11,13 +11,13 @@ session_start();
 deconnexion();
 switch ($_SESSION['role']) {
     case 'Admin':
-        require 'c-admin.php';
+        header('Location:c-admin.php');
         break;
     case 'Modo':
-        require 'c-modo.php';
+        header('Location:c-modo.php');
         break;
     case 'Client':
-        require 'c-client.php';
+        header('Location:c-client.php');
         break;
 }
 

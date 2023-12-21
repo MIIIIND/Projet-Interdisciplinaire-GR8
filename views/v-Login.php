@@ -1,7 +1,6 @@
-
 <?php ob_start(); ?>
 <div class="login">
-        <img src="img/IconLog.png" alt="icon de compte">
+        <img src="/Projet-Interdisciplinaire-GR8/views/img/IconLog.png" alt="icône compte">
         <form method="post" action="index.php">
             <p><label for="login">Identifiant<br>
             <input type="text" name="login" id="login">
@@ -12,7 +11,7 @@
             <p><input type="submit" name="connexion" value="connexion">
         </form>
 </div>
-<p>Si vous ne disposez pas de compte, contacter l'administrateur.</p>
+<p>Si vous ne disposez pas de compte, contactez l'administrateur.</p>
 <?php
 $nav = null;
 $title = 'Connexion';

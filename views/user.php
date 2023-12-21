@@ -44,7 +44,7 @@ while ($row = $shopStmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 // Prepare product query with optional filters
-$productQuery = "SELECT product_id, Souvenir_name, price, shop_id_Fk FROM product";
+$productQuery = "SELECT p.product_id, p.Souvenir_name, p.price, s.shop_name FROM product AS p JOIN shop AS s ON p.shop_id_Fk = s.shop_id";
 $filterConditions = [];
 $params = [];
 
@@ -70,89 +70,26 @@ foreach ($params as $key => &$value) {
     $productStmt->bindParam($key, $value);
 }
 $productStmt->execute();
-
-        
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="views/style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-.container {
-    display: flex;
-    height: 100%;
-}
-.filter-bar {
-    background: #f1f1f1;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-.filter-btn {
-    margin-right: 10px;
-}
-.filter-types {
-    display: flex;
-}
-.type-btn {
-    margin-right: 5px;
-}
-.content {
-    flex-grow: 1;
-    padding: 10px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 1px solid black;
-}
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-.sidebar {
-    width: 200px;
-    background: #ddd;
-    padding: 10px;
-}
-.filter-form {
-    display: flex;
-    flex-direction: column;
-}
-.filter-form label,
-.filter-form input,
-.filter-form select,
-.filter-form button {
-    margin-bottom: 10px;
-}
-</style>
-<title>Product Catalog</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
+  <title>Isims Parc | Acceuil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <?php require '_header.html'?>
 <?php if ($orderPlaced): ?>
     <p>Order placed successfully for <?= htmlspecialchars($orderedProductName) ?>!</p>
 <?php endif; ?>
-<form class="small-box" action="c-client.php" method="post">
-    <div class="button-container">
-        <input type="submit" class="centered-button" name="getMag" value="Magasin">
-    </div>
-</form>
-<form class="small-box" action="c-client.php" method="post">
-    <div class="button-container">
-        <input type="submit" class="centered-button" name="getCommande" value="commande">
-    </div>
-</form>
+
 <div class="container">
     <div class="sidebar">
         <form method="post" class="filter-form">
@@ -177,9 +114,9 @@ th, td {
             <thead>
                 <tr>
                     <th>Souvenir</th>
-                    <th>Price</th>
-                    <th>Shop ID</th>
-                    <th>Order</th>
+                    <th>Prix</th>
+                    <th>Magasin</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -187,7 +124,7 @@ th, td {
                     <tr>
                         <td><?= htmlspecialchars($row['Souvenir_name']) ?></td>
                         <td><?= htmlspecialchars($row['price']) ?></td>
-                        <td><?= htmlspecialchars($row['shop_id_Fk']) ?></td>
+                        <td><?= htmlspecialchars($row['shop_name']) ?></td>
                         <td>
                             <form method="post">
                                 <input type="hidden" name="order_product_id" value="<?= $row['product_id'] ?>">

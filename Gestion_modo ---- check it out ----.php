@@ -1,8 +1,8 @@
 <?php
-require 'models/m-Model.php';
-$BD = new DB();
-$bd = $BD->getDB();
-if (isset($_POST['ajout'])) {
+// Include the database connection file
+include 'db.php';
+
+if (isset($_POST['add_modo'])) {
     // Updated SQL Query to include login
     $stmt = $bd->prepare("INSERT INTO user (first_name, second_name, role_Fk, password, login) VALUES (:nom, :prenom, :role_fk, :mdp, :login)");
     $stmt->bindParam(':nom', $nom);
@@ -15,10 +15,9 @@ if (isset($_POST['ajout'])) {
     $nom = $_POST['NomTextboxAjout'];
     $prenom = $_POST['PrenomTextboxAjout'];
     $role_fk = 2; // Moderator role ID
-    $mdp = sha1($_POST['MDPTextboxAjout']);
+    $mdp = $_POST['MDPTextboxAjout'];
     $login = $_POST['LoginTextboxAjout']; // Capture the login value
     $stmt->execute();
-        
 }
 
 // Handle Delete Moderator Form
@@ -50,37 +49,28 @@ if (isset($_POST['modify_modo'])) {
 
     $nom = $_POST['NomSelectSup']; // Name of the moderator to modify
     $prenom = $_POST['PrenomTextboxModif']; // New second name
-    $mdp = sha1($_POST['MDPTextboxModif']); // New password
+    $mdp = $_POST['MDPTextboxModif']; // New password
     $login = $_POST['LoginTextboxModif']; // New login
     $stmt->execute();
 
     // Redirect to the same page to refresh
-    
-}
-if ( isset($_POST['retour']) ) {
-    require 'c-admin.php';
-    session_destroy() ;
+    header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
-    } 
-    
-
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="views/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
 </head>
 <body>
-<?php require 'views/_header.html';?>
     <div class="container">
         <div class="columns-container">
             <!-- Add Moderator Form -->
             <div class="column">
                 <div class="content-box">
-                    <form method="post" action="Gestion_modo.php">
+                    <form method="post" action="">
                         <p style="line-height:10.8pt">Ajouter Modo</p>
                         <p><span>Nom</span><span class="interaction-box"><input type="text" id="NomTextboxAjout" name="NomTextboxAjout"></span></p>
                         <p><span>Prenom</span><span class="interaction-box"><input type="text" id="PrenomTextboxAjout" name="PrenomTextboxAjout"></span></p>
@@ -96,7 +86,7 @@ if ( isset($_POST['retour']) ) {
                             </select>
                         </span></p>
                         <p><span>MDP</span><span class="interaction-box"><input type="text" id="MDPTextboxAjout" name="MDPTextboxAjout"></span></p>
-                        <input type="submit" name="ajout" class="custom-button" value="Ajout">
+                        <button type="submit" name="add_modo" class="custom-button">Ajout</button>
                     </form>
                 </div>
             </div>
@@ -104,7 +94,7 @@ if ( isset($_POST['retour']) ) {
         <!-- Delete Moderator Form -->
     <div class="column">
         <div class="content-box">
-            <form method="post" action="Gestion_modo.php">
+            <form method="post" action="">
                 <p>Sup Modo</p>
                 <p><span>Nom</span><span class="interaction-box">
                 <select id="NomSelectSup" name="NomSelectSup"> <!-- Corrected name attribute -->
@@ -124,7 +114,7 @@ if ( isset($_POST['retour']) ) {
             <!-- Modify Moderator Form -->
             <div class="column">
                 <div class="content-box">
-                    <form method="post" action="Gestion_modo.php">
+                    <form method="post" action="">
                         <p>Modif modo</p>
                         <p><span>Nom</span><span class="interaction-box">
                         <select id="NomSelectSup2" name="NomSelectSup">
@@ -154,12 +144,6 @@ if ( isset($_POST['retour']) ) {
                 </div>
             </div>
         </div>
-        <form class="small-box" action="Gestion_modo.php" method="post">
-            <div class="button-container">
-                <input type="submit" class="centered-button" name="retour" value="Fermer">
-            </div>
-        </form>
     </div>
-    <?php require 'views/_footer.html';?>
 </body>
 </html>

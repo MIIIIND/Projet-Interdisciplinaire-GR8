@@ -1,5 +1,5 @@
 <?php
-require_once 'models/m-Model.php';
+require 'models/m-Model.php';
 session_start();
 $BD = new DB();
 $bd = $BD->getDB();

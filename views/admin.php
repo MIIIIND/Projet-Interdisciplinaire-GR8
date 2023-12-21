@@ -108,8 +108,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
 
 // Get page statistique
 if ( isset($_POST['statistique']) ) {
-    require 'admin_stat.php';
+    header("Location:admin_stat.php");
     } 
+    
+    if ( isset($_POST['GestionModo']) ) {
+        header("Location:Gestion_modo.php");
+        }   
     
 ?>
 
@@ -120,15 +124,6 @@ if ( isset($_POST['statistique']) ) {
     <link rel="stylesheet" href="views/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Apply some basic styling */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
         /* Style for the big box */
         .big-box {
             display: grid;
@@ -273,9 +268,6 @@ if ( isset($_POST['statistique']) ) {
         </form>
     </div>
     <?php // Get page Gestion des modo
-if ( isset($_POST['GestionModo']) ) {
-    require 'Gestion_modo.php';
-    } 
     require '_footer.html';
     ?>
 </body>

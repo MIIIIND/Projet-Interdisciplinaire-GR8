@@ -53,7 +53,7 @@ function loginDB() {
         return;
     }
     $_SESSION['user_id']=$user->user_id;
-    switch (strtolower($user->role_name)) {
+    switch (strtolower($user->role_name))  {
         case 'admin':
             $_SESSION['role']='Admin';
             header('Location: c-master.php');

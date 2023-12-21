@@ -1,8 +1,8 @@
 <?php
-
-echo 'Admin';
-echo $_SESSION['role'];
-echo $_SESSION['user_id'];
-#require 'views/v-Magasin.php';
+require 'models/m-Model.php';
+session_start();
+$BD = new DB();
+$bd = $BD->getDB();
+require 'views/admin_stat.php';
 
 ?>

@@ -3,31 +3,32 @@
 include 'db.php';
 
 if (isset($_POST['add_modo'])) {
-  // Prepare and bind parameters
-  $stmt = $bd->prepare("INSERT INTO user (first_name, second_name, role_Fk, password) VALUES (:nom, :prenom, :role_fk, :mdp)");
-  $stmt->bindParam(':nom', $nom);
-  $stmt->bindParam(':prenom', $prenom);
-  $stmt->bindParam(':role_fk', $role_fk);
-  $stmt->bindParam(':mdp', $mdp);
+    // Updated SQL Query to include login
+    $stmt = $bd->prepare("INSERT INTO user (first_name, second_name, role_Fk, password, login) VALUES (:nom, :prenom, :role_fk, :mdp, :login)");
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':prenom', $prenom);
+    $stmt->bindParam(':role_fk', $role_fk);
+    $stmt->bindParam(':mdp', $mdp);
+    $stmt->bindParam(':login', $login);
 
-  // Set parameters and execute
-  $nom = $_POST['NomTextboxAjout'];
-  $prenom = $_POST['PrenomTextboxAjout'];
-  $role_fk = 2; // Replace 2 with the actual role_id for moderator from your 'role' table
-  $mdp = $_POST['MDPTextboxAjout'];
-  $stmt->execute();
+    // Set parameters and execute
+    $nom = $_POST['NomTextboxAjout'];
+    $prenom = $_POST['PrenomTextboxAjout'];
+    $role_fk = 2; // Moderator role ID
+    $mdp = $_POST['MDPTextboxAjout'];
+    $login = $_POST['LoginTextboxAjout']; // Capture the login value
+    $stmt->execute();
 }
 
 // Handle Delete Moderator Form
 if (isset($_POST['delete_modo'])) {
-  $stmt = $bd->prepare("DELETE FROM user WHERE second_name = :nom");
-  $stmt->bindParam(':nom', $nom);
+    $stmt = $bd->prepare("DELETE FROM user WHERE second_name = :nom");
+    $stmt->bindParam(':nom', $nom);
 
-  // Set parameter and execute
-  $nom = $_POST['NomSelectSup'];
-  $stmt->execute();
-  // Add error handling as necessary
+    $nom = $_POST['NomSelectSup']; 
+    $stmt->execute();
 }
+
 
 // Fetch shop names for the Magasin dropdowns
 $magasinQuery = $bd->query("SELECT shop_name FROM shop");
@@ -40,15 +41,16 @@ $noms = $nomQuery->fetchAll(PDO::FETCH_ASSOC);
 
 // Handle Modify Moderator Form
 if (isset($_POST['modify_modo'])) {
-    $stmt = $bd->prepare("UPDATE user SET second_name = :prenom, password = :mdp WHERE second_name = :nom");
+    $stmt = $bd->prepare("UPDATE user SET second_name = :prenom, password = :mdp, login = :login WHERE second_name = :nom");
     $stmt->bindParam(':nom', $nom);
     $stmt->bindParam(':prenom', $prenom);
     $stmt->bindParam(':mdp', $mdp);
+    $stmt->bindParam(':login', $login);
 
-    // Set parameters and execute
-    $nom = $_POST['NomSelectModif'];
-    $prenom = $_POST['PrenomTextboxModif'];
-    $mdp = $_POST['MDPTextboxModif'];
+    $nom = $_POST['NomSelectSup']; // Name of the moderator to modify
+    $prenom = $_POST['PrenomTextboxModif']; // New second name
+    $mdp = $_POST['MDPTextboxModif']; // New password
+    $login = $_POST['LoginTextboxModif']; // New login
     $stmt->execute();
 
     // Redirect to the same page to refresh
@@ -72,6 +74,7 @@ if (isset($_POST['modify_modo'])) {
                         <p style="line-height:10.8pt">Ajouter Modo</p>
                         <p><span>Nom</span><span class="interaction-box"><input type="text" id="NomTextboxAjout" name="NomTextboxAjout"></span></p>
                         <p><span>Prenom</span><span class="interaction-box"><input type="text" id="PrenomTextboxAjout" name="PrenomTextboxAjout"></span></p>
+                        <p><span>Login</span><span class="interaction-box"><input type="text" id="LoginTextboxAjout" name="LoginTextboxAjout"></span></p>
                         <p><span>Magasin</span><span class="interaction-box">
                         <select id="MagasinSelectAjout" name="MagasinSelectAjout">
                                 <option value="" disabled selected>Select a Magasin</option>
@@ -88,25 +91,25 @@ if (isset($_POST['modify_modo'])) {
                 </div>
             </div>
 
-            <!-- Delete Moderator Form -->
-            <div class="column">
-                <div class="content-box">
-                    <form method="post" action="">
-                        <p>Sup Modo</p>
-                        <p><span>Nom</span><span class="interaction-box">
-                        <select id="NomSelectSup" name="NomSelectSup">
-                                <option value="" disabled selected>Select a Nom</option>
-                                <?php foreach ($noms as $nom): ?>
-                                    <option value="<?php echo htmlspecialchars($nom['second_name']); ?>">
-                                        <?php echo htmlspecialchars($nom['second_name']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </span></p>
-                        <button type="submit" name="delete_modo" class="custom-button">Sup</button>
-                    </form>
-                </div>
-            </div>
+        <!-- Delete Moderator Form -->
+    <div class="column">
+        <div class="content-box">
+            <form method="post" action="">
+                <p>Sup Modo</p>
+                <p><span>Nom</span><span class="interaction-box">
+                <select id="NomSelectSup" name="NomSelectSup"> <!-- Corrected name attribute -->
+                        <option value="" disabled selected>Select a Nom</option>
+                        <?php foreach ($noms as $nom): ?>
+                            <option value="<?php echo htmlspecialchars($nom['second_name']); ?>">
+                                <?php echo htmlspecialchars($nom['second_name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </span></p>
+                <button type="submit" name="delete_modo" class="custom-button">Sup</button>
+            </form>
+        </div>
+    </div>
 
             <!-- Modify Moderator Form -->
             <div class="column">
@@ -124,6 +127,7 @@ if (isset($_POST['modify_modo'])) {
                             </select>
                         </span></p>
                         <p><span>Nouveau Nom</span><span class="interaction-box"><input type="text" id="PrenomTextboxModif" name="PrenomTextboxModif"></span></p>
+                        <p><span>Nouveau Login</span><span class="interaction-box"><input type="text" id="LoginTextboxModif" name="LoginTextboxModif"></span></p>
                         <p><span>Magasin</span><span class="interaction-box">
                         <select id="MagasinSelectAjout2" name="MagasinSelectAjout">
                                 <option value="" disabled selected>Select a Magasin</option>

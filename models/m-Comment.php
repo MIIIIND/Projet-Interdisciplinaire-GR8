@@ -12,6 +12,11 @@ class Comment extends DB {
         $sql = 'UPDATE comment SET content="Ce commentaire a été supprimé." WHERE comment_id=?';
         $this->executeRequest($sql, array((int) $comment_id));
     }
+
+    public function addComment($author_id, $target_shop, $content, $score) {
+        $sql = 'INSERT INTO comment (author_user_id_Fk, target_shop_Fk, content, score) VALUES (?, ?, ?, ?);';
+        $this->executeRequest($sql, array((int) $author_id, (int) $target_shop, (string) $content, (int) $score));
+    }
 }
 ?>
 

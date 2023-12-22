@@ -5,14 +5,14 @@ class Shop extends DB {
     public function getAllShops()  { // retourne tous les magasins
         $sql = 'SELECT * from shop';
         $shops = $this->executeRequest($sql);
-        return $shops->fetchall();
+        return $shops;
     }
 
     public function getShop($idMag){ // retourne un magasin
         $sql = 'SELECT * from shop WHERE shop_id=?';
         $shop = $this->executeRequest($sql, array((int) $idMag));
         if ($shop->rowcount() == 1)
-            return $shop->fetch();
+            return $shop;
         else
             #throw new Execption("le magasin on le connais pas'$idMag'");
             echo "le magasin on le connais pas'$idMag'";

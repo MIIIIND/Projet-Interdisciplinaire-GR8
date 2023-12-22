@@ -34,5 +34,11 @@ class Order extends DB {
         $clientOrder = $this->executeRequest($sql, array((int) $user_id));	
         return $clientOrder;
     }
+
+    public function addOrder($product_id, $user_id, $quantity, $state_id) {
+        $sql = "INSERT INTO `order` (product_Fk, client_user_id_Fk, quantity, date, state_Fk) VALUES (?, ?, ?, NOW(), ?)";
+        $addOrder = $this->executeRequest($sql, array((int) $product_id, (int) $user_id, (int) $quantity, (int) $state_id));
+        return $addOrder;
+    }
 }
 ?>

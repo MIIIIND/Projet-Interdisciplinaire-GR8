@@ -8,7 +8,7 @@ $_SESSION['shop_id'] = $shop_id;
 
 if (isset($_POST['Envoi'])) {
 	$SHOP->setSchedules($_POST['H_ouv'], $_POST['H_fer'], $shop_id);
-	header('Location: modo.php');
+	header('Location: c-modo.php');
 	exit();
 }
 require 'views/v-modo.php'

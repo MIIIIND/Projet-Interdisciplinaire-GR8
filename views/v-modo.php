@@ -9,6 +9,18 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
   <title>Isims Parc | Gestion magasin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+	input[type="time"] {
+		width: fit-content;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		background-color: #f8f8f8;
+		resize: none;
+	}
+  </style>
 </head>
   <body>
   <?php include '_header.html' ;?>
@@ -19,7 +31,7 @@
 		<li><a href="c-gestion_commentaires.php">Gestion des commentaire</a></li>
 	</ul>
 	<div class="center_hor">
-		<form method="post">
+		<form method="post" action="c-modo.php">
 			<label>Heure d ouverture<br>
 				<input type="time" name="H_ouv" id="H_ouv"><br>
 			</label>

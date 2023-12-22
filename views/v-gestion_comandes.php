@@ -25,25 +25,25 @@
             <th>État de la commande</th>
         </tr>
     <?php while ($data = $cater->fetch()) : ?>
-        <form method="post">
+        <form method="post" action="c-gestion_comandes.php">
+            <input type="hidden" name="order_id" value="<?= $data['order_id'] ?>">
+            <input type="hidden" name="user_id" value="<?= $data['user_id'] ?>">
+            <input type="hidden" name="price" value="<?= $data['prix'] ?>">
             <tr>
-                <td>
-                    <input type="hidden" name="order_id" value="<?= $data['order_id'] ?>">
-                    <?= $data["first_name"] . ' ' . $data["second_name"] ?>
-                </td>
+                <td><?= $data["first_name"] . ' ' . $data["second_name"] ?></td>
                 <td><?= $data["cottage_name"] ?></td>
                 <td><?= $data["Souvenir_name"] ?></td>
                 <td><?= $data['quantity'] ?></td>
                 <td><?= $data['state_name'] ?></td>
                 <td>
-                    <select name="" id="">
+                    <select name="state_id" id="state_id">
                         <?php $states = $ORDER->getOrderStates(); ?>
                         <?php while ($data = $states->fetch()) : ?>
                             <option value="<?= $data->order_state_id; ?>"><?= $data->state_name; ?></option>
                         <?php endwhile; ?>
                     </select>
                 </td>
-                <td><input type="submit" name="vali_com" value="Modifier l'état"></td>
+                <td><input type="submit" name="modif_state" value="Modifier l'état"></td>
                 <td><input type="submit" name="facturer" value="facturer"></td>
             </tr>
         </form>

@@ -57,8 +57,8 @@ class Shop extends DB {
     }
 
     public function setSchedules($open_h, $close_h, $user_id) {
-        $sql = 'UPDATE shop SET opens_at=?, closes_at=? WHERE manager_user_id_Fk=?';
-        $this->executeRequest($sql, array($open_h, $close_h, (int) $user_id));
+        $sql = "UPDATE shop SET opens_at='?', closes_at='?' WHERE manager_user_id_Fk=?;";
+        $this->executeRequest($sql, array(date('H:i:s', strtotime($open_h)), date('H:i:s', strtotime($close_h)), (int) $user_id));
     }
 
     public function addShop($name, $type, $user_id=2) { // L'interface ne gère pas encore l'ajout d'un manager

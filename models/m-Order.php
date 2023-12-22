@@ -41,5 +41,10 @@ class Order extends DB {
         $addOrder = $this->executeRequest($sql, array((int) $product_id, (int) $user_id, (int) $quantity, (int) $state_id));
         return $addOrder;
     }
+
+    public function updateOrderState($order_id, $state_id) {
+        $sql = "UPDATE `order` SET state_Fk=? WHERE order_id=?;";
+        $this->executeRequest($sql, array((int) $state_id, (int) $order_id));
+    }
 }
 ?>

@@ -13,7 +13,7 @@ function logout(){
 function login(){
     require 'views/v-Login.php';
     if ( isset($_POST['connexion']) ) {
-        require 'config.php';
+        require '_CONFIG.php';
         if ($LOGIN_METHOD == 1) {loginDB();}
         else {loginLDAP();}
     }

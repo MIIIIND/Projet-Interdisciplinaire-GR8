@@ -1,8 +1,5 @@
 <?php
-require 'c-deconnect.php';
-deconnexion();
 session_start();
-
 require 'models/m-Shop.php';
 $SHOP = new Shop();
 

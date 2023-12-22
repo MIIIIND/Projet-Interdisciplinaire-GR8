@@ -1,8 +1,5 @@
 <?php
-// Gestion déconnexion et session
-require 'c-deconnect.php';
 session_start();
-deconnexion();
 
 // Modèles requis pour la page
 require 'models/m-Shop.php';

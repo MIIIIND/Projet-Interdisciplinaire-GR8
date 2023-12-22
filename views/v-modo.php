@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
-<meta charset="UTF-8">
+<head>
+	<meta charset="UTF-8">
   <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -2,7 +2,15 @@
 require_once 'models/m-User.php';
 $user_db = new User();
 
-function connexion(){
+function logout(){
+    if ( isset($_POST['deconnexion']) ) {
+        session_unset() ;			//on détruit les variables de notre session
+        session_destroy() ;		//on détruit la session
+        header('Location:index.php');	//on redirige
+    }
+}
+
+function login(){
     require 'views/v-Login.php';
     if ( isset($_POST['connexion']) ) {
         require 'config.php';
@@ -56,15 +64,15 @@ function loginDB() {
     switch (strtolower($user->role_name))  {
         case 'admin':
             $_SESSION['role']='Admin';
-            header('Location: c-master.php');
+            header('Location: index.php');
             break;
         case 'modo':
             $_SESSION['role']='Modo';
-            header('Location: c-master.php');
+            header('Location: index.php');
             break;
         case 'client':
             $_SESSION['role']='Client';
-            header('Location: c-master.php');
+            header('Location: index.php');
             break;
     }
 }

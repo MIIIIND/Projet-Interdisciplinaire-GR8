@@ -8,6 +8,12 @@ class Product extends DB {
         return $products;
     }
 
+    public function getProduct($id) {
+        $sql = "SELECT Souvenir_name FROM product WHERE product_id=?;";
+        $product = $this->executeRequest($sql, array((int) $id));
+        return $product;
+    }
+
     public function getProductTypes() {
         $sql = "SELECT * FROM product_type;";
         $productTypes = $this->executeRequest($sql);
@@ -37,6 +43,11 @@ class Product extends DB {
     public function delType($name) {
         $sql = "DELETE FROM product_type WHERE type_name=?;";
         $this->executeRequest($sql, array((string) $name));
+    }
+
+    public function prepareRequestForFilter($sql) { // A rather specific function, I know x)
+        $prodcuts = $this->getPreparedRequest($sql);
+        return $prodcuts;
     }
 }
 ?>

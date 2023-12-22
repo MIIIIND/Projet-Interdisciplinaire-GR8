@@ -16,5 +16,5 @@
 $nav = null;
 $title = 'Connexion';
 $content = ob_get_clean();
-require '_template.php'
+require '_template-login.php'
 ?>  

@@ -40,9 +40,9 @@ class Product extends DB {
         $this->executeRequest($sql, array((string) $name));
     }
 
-    public function delType($name) {
-        $sql = "DELETE FROM product_type WHERE type_name=?;";
-        $this->executeRequest($sql, array((string) $name));
+    public function delType($id) {
+        $sql = "DELETE FROM product_type WHERE product_type_id=?;";
+        $this->executeRequest($sql, array((string) $id));
     }
 
     public function prepareRequestForFilter($sql) { // A rather specific function, I know x)

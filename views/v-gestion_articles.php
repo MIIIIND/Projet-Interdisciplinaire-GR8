@@ -19,7 +19,7 @@
 	<div class="big-row">
 	<!-- Ajouter article -->
 	<div class="small-box">
-		<form method="post" action="gestion_articles.php">
+		<form method="post" action="c-gestion_articles.php">
 			<h3>Ajouter article</h3>
 			<label><h4>Nom</h4>
 			<input type="text" name="nom_aj" id=""><br>

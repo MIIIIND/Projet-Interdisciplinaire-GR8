@@ -43,7 +43,7 @@ while ($row = $shopStmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 // Préparation de la requête pour les filtres
-$productQuery = "SELECT p.product_id, p.Souvenir_name, p.price, s.shop_name FROM product AS p JOIN shop AS s ON p.shop_id_Fk = s.shop_id;";
+$productQuery = "SELECT p.product_id, p.Souvenir_name, p.price, s.shop_name FROM product AS p JOIN shop AS s ON p.shop_id_Fk = s.shop_id";
 $filterConditions = [];
 $params = [];
 

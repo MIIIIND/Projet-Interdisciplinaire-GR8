@@ -3,7 +3,6 @@ require 'models/m-Shop.php';
 $SHOP = new Shop();
 session_start();
 
-$_SESSION['user_id'] = 2;
 $shop_id = $SHOP->getShopFromOwner($_SESSION['user_id'])->fetch()->shop_id;
 $_SESSION['shop_id'] = $shop_id;
 

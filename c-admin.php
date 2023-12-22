@@ -1,122 +1,95 @@
 <?php
-require_once 'models/m-Model.php';
 session_start();
-$BD = new DB();
-$bd = $BD->getDB();
+require 'models/m-Shop.php';
+require 'models/m-ShopType.php';
+$SHOP = new Shop();
+$SHOP_TYPE = new ShopType();
+
+// Redirect to the appropriate page (should be links in the navbar)
+if ( isset($_POST['statistique']) ) {
+    header("Location:c-admin_stat.php");
+} 
+    
+if ( isset($_POST['GestionModo']) ) {
+    header("Location:c-admin_gestion_modo.php");
+}  
 
 $nomOptions = '';
 $typeOptions = '';
 
-// Fetch options for Nom dropdown
-$nomQuery = "SELECT shop_name FROM shop";
-$nomResult = $bd->query($nomQuery);
-while ($row = $nomResult->fetch(PDO::FETCH_ASSOC)) {
+// pour le select des boutiques
+$shop_list = $SHOP->getAllShops();
+while ($row = $shop_list->fetch(PDO::FETCH_ASSOC)) {
     $nomOptions .= "<option value='" . htmlspecialchars($row['shop_name']) . "'>" . htmlspecialchars($row['shop_name']) . "</option>";
 }
 
-// Fetch options for Type dropdown
-$typeQuery = "SELECT type_name FROM shop_type";
-$typeResult = $bd->query($typeQuery);
-while ($row = $typeResult->fetch(PDO::FETCH_ASSOC)) {
+// pour le select des types
+$type_list = $SHOP_TYPE->getAllShopTypes();
+while ($row = $type_list->fetch(PDO::FETCH_ASSOC)) {
     $typeOptions .= "<option value='" . htmlspecialchars($row['type_name']) . "'>" . htmlspecialchars($row['type_name']) . "</option>";
 }
 
-// Check if the Modification Form has been submitted
+// Modification Magasin
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier'])) {
     $selectedNom = $_POST['nom'];
     $nomTextBox = $_POST['nomTextBox'];
     $selectedType = $_POST['type'];
-
-    // SQL to update the shop table
-    $updateQuery = "UPDATE shop SET shop_name = ?, shop_type_Fk = (SELECT shop_type_id FROM shop_type WHERE type_name = ?) WHERE shop_name = ?";
-
-    // Prepare and execute query
-    $stmt = $bd->prepare($updateQuery);
-    $stmt->bindParam(1, $nomTextBox);
-    $stmt->bindParam(2, $selectedType);
-    $stmt->bindParam(3, $selectedNom);
-    if ($stmt->execute()) {
+    $stmt = $SHOP->updateShop($nomTextBox, $selectedType, $selectedNom);
+    if ($stmt) {
         header("Location: ".$_SERVER['PHP_SELF']);
         exit();
     } else {
-        echo "<p>Error updating record: " . htmlspecialchars($bd->errorInfo()[2]) . "</p>";
+        $error = $SHOP->getError();
+        echo "<p>Erreur lors de la modification : " . $error . "</p>";
     }
 }
 
-// Check if the Ajout Form has been submitted
+// Ajout type de magasin
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajout'])) {
     $nomMagasin = $_POST['nomMagasin'];
     $typeMagasin = $_POST['typeMagasin'];
-
-    // SQL to insert a new shop
-    $insertQuery = "INSERT INTO shop (shop_name, shop_type_Fk) VALUES (?, (SELECT shop_type_id FROM shop_type WHERE type_name = ?))";
-
-    // Prepare and execute query
-    $stmt = $bd->prepare($insertQuery);
-    $stmt->bindParam(1, $nomMagasin);
-    $stmt->bindParam(2, $typeMagasin);
-    if ($stmt->execute()) {
+    $stmt = $SHOP->addShop($nomMagasin, $typeMagasin);
+    if ($stmt) {
         header("Location: ".$_SERVER['PHP_SELF']);
         exit();
     } else {
-        echo "<p>Error adding new shop: " . htmlspecialchars($bd->errorInfo()[2]) . "</p>";
+        $error = $SHOP->getError();
+        echo "<p>Erreur lors de l'ajout : " . $error . "</p>";
     }
-    
 }
 
+// Ajout Type de Magasin
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajoutType'])) {
     $typeMagasin = $_POST['AjoutTypeMagasin'];
-
-    // SQL to insert a new shop type
-    $insertTypeQuery = "INSERT INTO shop_type (type_name) VALUES (?)";
-
-    // Prepare and execute query
-    $stmt = $bd->prepare($insertTypeQuery);
-    $stmt->bindParam(1, $typeMagasin);
-    if ($stmt->execute()) {
+    $stmt = $SHOP_TYPE->addShopType($typeMagasin);
+    if ($stmt) {
         header("Location: ".$_SERVER['PHP_SELF']);
         exit();
     } else {
-        echo "<p>Error adding new shop type: " . htmlspecialchars($bd->errorInfo()[2]) . "</p>";
+        $error = $SHOP_TYPE->getError();
+        echo "<p>Erreur lors de l'ajout : " . $error . "</p>";
     }
 }
 
-
-
-// Fetch options for Type to Delete dropdown
+// pour le select
 $typeDeleteOptions = '';
-$typeDeleteQuery = "SELECT type_name FROM shop_type";
-$typeDeleteResult = $bd->query($typeDeleteQuery);
-while ($row = $typeDeleteResult->fetch(PDO::FETCH_ASSOC)) {
+$type_list = $SHOP_TYPE->getAllShopTypes();
+while ($row = $type_list->fetch(PDO::FETCH_ASSOC)) {
     $typeDeleteOptions .= "<option value='" . htmlspecialchars($row['type_name']) . "'>" . htmlspecialchars($row['type_name']) . "</option>";
 }
 
-// Check if the Suppression Form has been submitted
+// Suppression Type de Magasin
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimer'])) {
     $typeToDelete = $_POST['typeToDelete'];
-
-    // SQL to delete the selected shop type
-    $deleteQuery = "DELETE FROM shop_type WHERE type_name = ?";
-
-    // Prepare and execute query
-    $stmt = $bd->prepare($deleteQuery);
-    $stmt->bindParam(1, $typeToDelete);
-    if ($stmt->execute()) {
+    $stmt = $SHOP_TYPE->delShopType($typeToDelete);
+    if ($stmt) {
         header("Location: ".$_SERVER['PHP_SELF']);
         exit();
     } else {
-        echo "<p>Error deleting shop type: " . htmlspecialchars($bd->errorInfo()[2]) . "</p>";
+        $error = $SHOP_TYPE->getError();
+        echo "<p>Erreur lors de la supression : " . $error . "</p>";
     }
 }
-
-// Get page statistique
-if ( isset($_POST['statistique']) ) {
-    header("Location:c-admin_stat.php");
-    } 
-    
-    if ( isset($_POST['GestionModo']) ) {
-        header("Location:c-admin_gestion_modo.php");
-        }   
 
 require 'views/v-admin.php';
 ?>

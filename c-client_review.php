@@ -1,9 +1,9 @@
 <?php
+session_start();
 require 'models/m-Shop.php';
 require 'models/m-Comment.php';
 $COMMENT = new Comment();
 $SHOP = new Shop();
-session_start();
 
 // Ajout des magasin au select
 function populateDropdown($bd, $selected_shop_id) {

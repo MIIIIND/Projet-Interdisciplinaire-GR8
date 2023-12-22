@@ -48,9 +48,24 @@ class Shop extends DB {
         return $stats;
     }
 
+    public function updateShop($newName, $newType, $oldName) {
+        $sql = "UPDATE shop SET shop_name = ?, shop_type_Fk = (
+                    SELECT shop_type_id FROM shop_type WHERE type_name = ?
+                ) WHERE shop_name = ?";
+
+        return $this->executeRequest($sql, array((string) $newName, (string) $newType, (string) $oldName));
+    }
+
     public function setSchedules($open_h, $close_h, $user_id) {
         $sql = 'UPDATE shop SET opens_at=?, closes_at=? WHERE manager_user_id_Fk=?';
         $this->executeRequest($sql, array($open_h, $close_h, (int) $user_id));
+    }
+
+    public function addShop($name, $type, $user_id=2) { // L'interface ne gère pas encore l'ajout d'un manager
+        $sql = 'INSERT INTO shop (shop_name, shop_type_Fk, manager_user_id_Fk)
+                VALUES (?, (SELECT shop_type_id FROM shop_type WHERE type_name = ?), ?)';
+        
+        return $this->executeRequest($sql, array((string) $name, (string) $type, (int) $user_id));
     }
 }
 ?>

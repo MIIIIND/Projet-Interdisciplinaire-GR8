@@ -1,8 +1,9 @@
 <?php
+session_start();
 require 'models/m-Comment.php';
 $COMMENT= new Comment();
 
-$shop_id = $_SESSION['shop_id'] = 4;
+$shop_id = $_SESSION['shop_id'];
 
 $cater=$COMMENT->getShopComments($shop_id);
 

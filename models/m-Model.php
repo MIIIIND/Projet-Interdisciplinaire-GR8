@@ -36,5 +36,9 @@ class DB {
         $results = $this->getDB()->prepare($sql);
         return $results;
     }
+
+    public function getError() {
+        return htmlspecialchars($this->getDB()->errorInfo()[2]);
+    }
 }
 ?>

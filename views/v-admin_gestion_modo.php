@@ -1,74 +1,20 @@
-<?php
-if (isset($_POST['ajout'])) {
-    // Updated SQL Query to include login
-    $stmt = $bd->prepare("INSERT INTO user (first_name, second_name, role_Fk, password, login) VALUES (:nom, :prenom, :role_fk, :mdp, :login)");
-    $stmt->bindParam(':nom', $nom);
-    $stmt->bindParam(':prenom', $prenom);
-    $stmt->bindParam(':role_fk', $role_fk);
-    $stmt->bindParam(':mdp', $mdp);
-    $stmt->bindParam(':login', $login);
-
-    // Set parameters and execute
-    $nom = $_POST['NomTextboxAjout'];
-    $prenom = $_POST['PrenomTextboxAjout'];
-    $role_fk = 2; // Moderator role ID
-    $mdp = $_POST['MDPTextboxAjout'];
-    $login = $_POST['LoginTextboxAjout']; // Capture the login value
-    if ($stmt->execute()) {
-        header("Location:admin_stat.php");
-        exit();
-    }
-}
-
-// Handle Delete Moderator Form
-if (isset($_POST['delete_modo'])) {
-    $stmt = $bd->prepare("DELETE FROM user WHERE second_name = :nom");
-    $stmt->bindParam(':nom', $nom);
-
-    $nom = $_POST['NomSelectSup']; 
-    $stmt->execute();
-}
-
-
-// Fetch shop names for the Magasin dropdowns
-$magasinQuery = $bd->query("SELECT shop_name FROM shop");
-$magasins = $magasinQuery->fetchAll(PDO::FETCH_ASSOC);
-
-// Fetch user second names for the Nom dropdowns where role_Fk = 2 (Moderator)
-$nomQuery = $bd->query("SELECT second_name FROM user WHERE role_Fk = 2");
-$noms = $nomQuery->fetchAll(PDO::FETCH_ASSOC);
-
-
-// Handle Modify Moderator Form
-if (isset($_POST['modify_modo'])) {
-    $stmt = $bd->prepare("UPDATE user SET second_name = :prenom, password = :mdp, login = :login WHERE second_name = :nom");
-    $stmt->bindParam(':nom', $nom);
-    $stmt->bindParam(':prenom', $prenom);
-    $stmt->bindParam(':mdp', $mdp);
-    $stmt->bindParam(':login', $login);
-
-    $nom = $_POST['NomSelectSup']; // Name of the moderator to modify
-    $prenom = $_POST['PrenomTextboxModif']; // New second name
-    $mdp = $_POST['MDPTextboxModif']; // New password
-    $login = $_POST['LoginTextboxModif']; // New login
-    $stmt->execute();
-
-    // Redirect to the same page to refresh
-    
-}
-if ( isset($_POST['retour']) ) {
-    require 'c-admin.php';
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit;
-    } 
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-  
+<meta charset="UTF-8">
+  <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>"/>
+  <title>Isims Parc | Gestion modérateur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <?php require '_header.html' ?>
+    <ul>
+        <li><a href="c-admin.php">Retour</a></li>
+    </ul>
     <div class="container">
         <div class="columns-container">
             <!-- Add Moderator Form -->
@@ -148,11 +94,7 @@ if ( isset($_POST['retour']) ) {
                 </div>
             </div>
         </div>
-        <form class="small-box" action="c-admin.php" method="post">
-            <div class="button-container">
-                <input type="submit" class="centered-button" name="retour" value="Fermer">
-            </div>
-        </form>
     </div>
+    <?php require '_footer.html' ?>
 </body>
 </html>

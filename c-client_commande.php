@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'models/m-Order.php';
-$ORDER = new Order(); // Création d'un objet Order pour accéder à la table associée
+$ORDER = new Order(); // Création d'un objet Order pour accéder à la table
 
 // Requête des commandes du client
 $cater = $ORDER->getClientOrder($_SESSION['user_id']);

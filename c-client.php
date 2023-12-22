@@ -19,7 +19,7 @@ function placeOrder($productId, $quantity, $stateId, &$productName) {
     // Récupère le nom de l'article commandé pour confirmer la commande
     $productStmt= $PRODUCT->getProduct($productId);
     $product = $productStmt->fetch(PDO::FETCH_ASSOC);
-    $productName = $product ? $product->Souvenir_name : '';
+    $productName = $product ? $product['Souvenir_name'] : '';
     // Insère la commande dans la base de données
     return $ORDER->addOrder($productId, $_SESSION['user_id'], $quantity, $stateId);
 }

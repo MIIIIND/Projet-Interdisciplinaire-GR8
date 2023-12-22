@@ -6,7 +6,7 @@ class DB {
         if ($this->db==null) {
             date_default_timezone_set('Europe/Brussels');
             try {
-                require 'config.php';
+                require '_CONFIG.php';
                 $db=new PDO('mysql:host='.$hoteDB.';dbname='.$nomBD, $userDB, $mdpDB
                 ,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 $db->exec("SET NAMES 'utf8'");

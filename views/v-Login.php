@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <div class="login">
-        <img src="/Projet-Interdisciplinaire-GR8/views/img/IconLog.png" alt="icône compte">
+        <img src="views/img/IconLog.png" alt="icône compte">
         <form method="post" action="index.php">
             <p><label for="login">Identifiant<br>
             <input type="text" name="login" id="login">

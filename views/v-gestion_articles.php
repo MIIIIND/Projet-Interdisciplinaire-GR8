@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-  <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+  <link rel="stylesheet" href="views/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
   <?php include 'views/_header.html' ;?>
   <main class="modo_art">
 	<ul>
-		<li><a href="/Projet-Interdisciplinaire-GR8/c-modo.php">Retour</a></li>
+		<li><a href="c-modo.php">Retour</a></li>
 	</ul>
 	<div class="big-row">
 	<!-- Ajouter article -->

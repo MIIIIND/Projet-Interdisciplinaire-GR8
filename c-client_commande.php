@@ -14,10 +14,10 @@ function etat($etat)
     while ($result=$suivi->fetch()) {
     if ($result->order_state_id == $etat){
         echo $result->state_name;
-        echo '<img src="/Projet-Interdisciplinaire-GR8/views/img/rond_plein.png" alt="état actuel">';
+        echo '<img src="views/img/rond_plein.png" alt="état actuel">';
     }else{
         echo $result->state_name;
-        echo '<img src="/Projet-Interdisciplinaire-GR8/views/img/rond_vide.png" alt="autre état">';}
+        echo '<img src="views/img/rond_vide.png" alt="autre état">';}
     }
 }
 

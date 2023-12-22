@@ -36,15 +36,15 @@ function loginLDAP() {
             switch ($upn) {
                 case 'administrateur.lan':
                     $_SESSION['role']='Admin';
-                    header('Location: c-master.php');
+                    header('Location: index.php');
                     break;
                 case 'modo.lan':
                     $_SESSION['role']='Modo';
-                    header('Location: c-master.php');
+                    header('Location: index.php');
                     break;
                 case 'grp8.lan':
                     $_SESSION['role']='Client';
-                    header('Location: c-master.php');
+                    header('Location: index.php');
                     break;
             }
         } else {echo "<p>Erreur dans l'identifiant ou le mot de passe.</p>" ;}

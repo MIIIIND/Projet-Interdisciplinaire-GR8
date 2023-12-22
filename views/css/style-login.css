@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-    background-image: url('/Projet-Interdisciplinaire-GR8/views/img/background.webp');
+    background-image: url('Background.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

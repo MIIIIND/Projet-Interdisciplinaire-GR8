@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <link rel="stylesheet" href="/Projet-Interdisciplinaire-GR8/views/css/style.css">
+  <link rel="stylesheet" href="views/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
                         <p><span>Prenom</span><span class="interaction-box"><input type="text" id="PrenomTextboxAjout" name="PrenomTextboxAjout"></span></p>
                         <p><span>Login</span><span class="interaction-box"><input type="text" id="LoginTextboxAjout" name="LoginTextboxAjout"></span></p>
                         <p><span>Mot de passe</span><span class="interaction-box"><input type="password" id="MDPTextboxAjout" name="MDPTextboxAjout"></span></p>
-                        <input type="submit" name="ajout" class="custom-button" value="Ajout">
+                        <input type="submit" name="ajout_modo" class="custom-button" value="Ajout_modo">
                     </form>
                 </div>
             </div>
@@ -76,15 +76,17 @@
             <div class="column">
                 <div class="content-box">
                     <form method="post" action="">
+                    <input type="hidden" name="Id_user" value="$nom['user_id']">
                         <p><h3>Modification de modérateur</h3></p>
                         <p><span>Modérateur</span><span class="interaction-box">
-                        <select id="NomSelectSup2" name="NomSelectSup">
+                        <select id="NomSelectSup2" name="NomSelectSup2">
                                 <option value="" disabled selected>Sélectionner un modérateur</option>
                                 <?php foreach ($noms as $nom): ?>
                                     <option value="<?php echo htmlspecialchars($nom['second_name']); ?>">
                                         <?php echo htmlspecialchars($nom['second_name']); ?>
                                     </option>
-                                <?php endforeach; ?>
+                                <?php 
+                            endforeach;?>
                             </select>
                         </span></p>
                         <p><span>Magasin</span><span class="interaction-box">

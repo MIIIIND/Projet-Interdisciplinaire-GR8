@@ -8,10 +8,12 @@ $SHOP_TYPE = new ShopType();
 // Redirect to the appropriate page (should be links in the navbar)
 if ( isset($_POST['statistique']) ) {
     header("Location:c-admin_stat.php");
+    exit;
 } 
     
 if ( isset($_POST['GestionModo']) ) {
     header("Location:c-admin_gestion_modo.php");
+    exit;
 }  
 
 $nomOptions = '';

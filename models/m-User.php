@@ -38,5 +38,11 @@ class User extends DB {
         $sql = "UPDATE user SET second_name = ?, password = ?, login = ? WHERE second_name = ?";
         $stmt = $this->executeRequest($sql, array((string) $prenom, (string) $mdp, (string) $login, (string) $nom));
     }
+    public function updateModo($idUser,$nameMag, $mdp, $login, $nom) {
+        $sql = "UPDATE user SET second_name = ?, password = ?, login = ? WHERE second_name = ?";
+        $stmt = $this->executeRequest($sql, array((string) $nom, (string) $mdp, (string) $login, (string) $nom));
+        $sql2 = "UPDATE shop set manager_user_id_Fk =? WHERE shop_name =?";
+        $stmt2 = $this->executeRequest($sql2, array((int) $idUser, (int) $nameMag));
+    }   
 }
 ?>
